@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>
+		All Entries
+	</title>
+{% endblock %}
+
+
+
+{% block body %}	
+
+	<div class="container-fluid">
+		<div class="row align-items-center">
+			<div class="col-12">
+				<h1>
+					Hello 
+					<span style="text-transform: capitalize;">
+					{{ name }}
+					</span><br>
+				</h1>
+			</div>
+			<div class="col-3 offset-6" style="text-align: center;">
+				<p>
+					<a href="{% url 'logout' %}">Logout</a>
+				</p>
+			</div>
+			
+		</div>
+	</div>
+	
+
+
+	{% for u in current_user %}
+		<div class="container entry">
+			<div class="row">
+				<div class="col-12">
+					<h4>
+						Name
+					</h4>
+					<h2>
+						{{ u.name }}
+					</h2>
+					<hr>
+
+					<h4>
+						College
+					</h4>
+					<h2>
+						{{ u.college }}
+					</h2>
+					<hr>
+
+			
+
+					
+					
+					
+				</div>		
+			</div>		
+		</div>
+	{% endfor %}
+
+	
+
+	
+		
+	
+{% endblock %}
+
+	
