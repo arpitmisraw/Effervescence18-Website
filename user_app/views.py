@@ -49,18 +49,21 @@ def index(request):
 
 
 def credentials(request):
-	if request.method == 'POST':
-		form = CredentialForm(request.POST)
-
-		if form.is_valid():
-			regular_user = form.save(commit = False)
-			regular_user.user = request.user
-			regular_user.save()
-			return redirect('index')
-		return render(request, 'user_app/index.html', {'form' : form})
+	if request.user.is_anonymous or RegularUser.objects.filter(user = request.user).exists():
+		return redirect('register')
 	else:
-		form = CredentialForm()
-		return render(request, 'user_app/credentials.html', {'form' : form})
+		if request.method == 'POST':
+			form = CredentialForm(request.POST)
+
+			if form.is_valid():
+				regular_user = form.save(commit = False)
+				regular_user.user = request.user
+				regular_user.save()
+				return redirect('index')
+			return render(request, 'user_app/index.html', {'form' : form})
+		else:
+			form = CredentialForm()
+			return render(request, 'user_app/credentials.html', {'form' : form})
 
 
 def register(request):
@@ -78,8 +81,6 @@ def register(request):
 			if user is not None:
 				if user.is_active:
 					login(request, user)
-					print('Done!')
-					print(request.user)
 					return redirect('credentials')
 		return render(request, 'user_app/registration_form.html', {'form' : form})
 	else:
