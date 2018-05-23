@@ -39,22 +39,16 @@ def login_view(request):
 
 
 
-
-
-
-
-
-
-
 def index(request):
-	print(request.user)
-	current_user = RegularUser.objects.filter(user = request.user)
-	context = {'current_user' : current_user, 'name' : current_user[0].name}
-	return render(request, 'user_app/index.html', context)
+	if request.user.is_authenticated:
+		current_user = RegularUser.objects.filter(user = request.user)
+		context = {'current_user' : current_user, 'name' : current_user[0].name}
+		return render(request, 'user_app/index.html', context)
+	else:
+		return redirect('login')
 
 
 def credentials(request):
-	print(request.user)
 	if request.method == 'POST':
 		form = CredentialForm(request.POST)
 

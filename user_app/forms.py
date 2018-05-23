@@ -34,7 +34,7 @@ class UserForm(forms.ModelForm):
 class CredentialForm(forms.ModelForm):
 	class Meta:
 		model = RegularUser
-		fields = ['name', 'college']
+		fields = ['name', 'college', 'birthday', 'gender']
 
 
 
