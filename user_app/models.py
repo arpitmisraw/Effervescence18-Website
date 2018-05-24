@@ -15,6 +15,7 @@ class RegularUser(models.Model):
 	check = models.BooleanField(default = False)
 	birthday = models.DateField(default = timezone.now)
 	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
+	phone = models.CharField(max_length = 10, null = True)
 
 
 

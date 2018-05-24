@@ -49,8 +49,12 @@ def index(request):
 
 
 def credentials(request):
-	if request.user.is_anonymous or RegularUser.objects.filter(user = request.user).exists():
+	if request.user.is_anonymous:
 		return redirect('register')
+	elif RegularUser.objects.filter(user = request.user).exists():
+		regular_user = RegularUser.objects.filter(user = request.user)
+		form = CredentialForm(instance = regular_user)
+		return render(request, 'user_app/credentials.html', {'form' : form})
 	else:
 		if request.method == 'POST':
 			form = CredentialForm(request.POST)

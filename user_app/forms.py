@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 
 
 
-
-
 class LoginForm(forms.ModelForm):	
 	class Meta:
 		
@@ -34,7 +32,7 @@ class UserForm(forms.ModelForm):
 class CredentialForm(forms.ModelForm):
 	class Meta:
 		model = RegularUser
-		fields = ['name', 'college', 'birthday', 'gender']
+		fields = ['name', 'college', 'birthday', 'gender', 'phone']
 
 
 
