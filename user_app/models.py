@@ -14,7 +14,7 @@ class RegularUser(models.Model):
 	college = models.TextField()
 	check = models.BooleanField(default = False)
 	birthday = models.DateField(default = timezone.now)
-	# gender = models.CharField(max_length = 1, choices = gender_options)
+	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
 
 
 
