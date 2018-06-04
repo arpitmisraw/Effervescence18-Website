@@ -1,0 +1,63 @@
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+{% csrf_token %}
+Name: <input type='text' name='name' id='name' />
+<br>
+
+College: <input type='text' name='college' id='college' />
+<br>
+
+Phone: <input type='text' name='phone' id='phone' />
+<br>
+
+Gender: <input type='text' name='gender' id='gender' />
+<br>
+
+
+Birthday: <input type='text' name='birthday' id='birthday' />
+<br>
+
+<input type='submit' value='Login' id='login_form' />
+
+
+<script>
+  $("#login_form").on("click", function(e) {
+    var name = $("#name").val();
+    var college = $("#college").val();
+    var phone = $('#phone').val();
+    var gender = $('#gender').val();
+    var birthday = $('#birthday').val();
+
+    $.ajax({
+      url : "/create_regular_user/",
+      type : 'post',
+      data : {
+        "name": name, 
+        "college": college, 
+        "phone" : phone,
+        "gender" : gender,
+        "birthday" : birthday
+      },
+      headers : {
+        'Authorization' : 'Token 0c73a7e12dd00da9889afc28df6292bd712b1675'
+      },
+      dataType : 'json',
+      success: function(data){
+        window.location.href = "/";
+      }
+    });
+  });
+
+  //   $.post("/create_regular_user/", {
+  //     "name": name, 
+  //     "college": college, 
+  //     "phone" : phone,
+  //     "gender" : gender,
+  //     "birthday" : birthday
+  //   }).success(function(data) {
+  //       var token = data["key"];
+  //       document.cookie = 'token='+token+";path=/";
+  //       window.location.href = "/";
+  //     });
+  // });
+</script>

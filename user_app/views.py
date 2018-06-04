@@ -112,21 +112,7 @@ def register(request):
 
 # API VIEWS
 
-class UserCreate(APIView):
-    serializer_class = UserSerializer
 
-    def post(self, request, format='json'):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                token = Token.objects.create(user=user)
-                json = serializer.data
-                json['token'] = token.key
-
-                return Response(json, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RegularUserCreate(APIView):
     serializer_class = RegularUserSerializer
@@ -136,6 +122,8 @@ class RegularUserCreate(APIView):
         if serializer.is_valid():
             regular_user = serializer.save()
             regular_user.user = request.user
+            token = Token.objects.get(user = request.user)
+            regular_user.referral = 'FE' + str(token)[:8]
             regular_user.save()
             if regular_user:
                 json = serializer.data
@@ -143,43 +131,36 @@ class RegularUserCreate(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def UserLogin(request):
-	username = request.POST.get('username')
-	password = request.POST.get('password')
-	user = authenticate(username=username, password=password)
-	if user is not None:
-			if user.is_active:
-				token, created = Token.objects.get_or_create(user=user)
-				request.session['auth'] = token.key
-				return redirect('/', request)
-	return redirect(settings.LOGIN_URL, request)
+    def get(self, request, format = None):
+    	regular_user = RegularUser.objects.get(user = request.user)
+    	json = {
+    		'name' : regular_user.name,
+    		'college' : regular_user.college,
+    		'check' : regular_user.check,
+    		'birthday' : regular_user.birthday,
+    		'gender' : regular_user.gender,
+    		'phone' : regular_user.phone,
+    		'referral' : regular_user.referral,
+    	}
+    	return Response(json)
 
 
-
-
-
-class ExampleView(APIView):
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request, format=None):
-        content = {
-            'user': str(request.user), 
-            'auth': str(request.auth),  
-        }
-        return Response(content)   
-
-class UserDetail(generics.RetrieveDestroyAPIView):
-	queryset = User.objects.all()
-	serializer_class = UserDetailSerializer
-
-class UserViewSet(viewsets.ModelViewSet):
-	queryset = User.objects.all()
-	serializer_class = UserDetailSerializer
-	lookup_field = 'username'
-
-
-class RegularUserViewSet(viewsets.ModelViewSet):
+class GetAndUpdateRegularUser(generics.RetrieveUpdateAPIView):
 	queryset = RegularUser.objects.all()
-	serializer_class = RegularUserDetailSerializer
+	serializer_class = RegularUserSerializer
 	lookup_field = 'name'
+
+
+
+def login(request):
+	return render(request, 'register/user_login.html', {})
+
+def user_details(request):
+	return render(request, 'register/user_details.html', {})
+
+
+
+
+
+
+

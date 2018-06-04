@@ -22,10 +22,10 @@ class RegularUser(models.Model):
 	name = models.CharField(max_length = 40)
 	college = models.TextField()
 	check = models.BooleanField(default = False)
-	birthday = models.DateField(default = timezone.now)
+	birthday = models.DateField(default = timezone.now, null = True)
 	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
 	phone = models.CharField(max_length = 10, null = True)
-
+	referral = models.CharField(max_length = 8, null = True)
 
 
 	def __str__(self):
