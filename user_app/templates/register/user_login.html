@@ -3,23 +3,31 @@
 {% csrf_token %}
 Username: <input type='text' name='username' id='username' />
 <br>
-Email: <input type='text' name='email' id='email' />
-<br>
+<!-- Email: <input type='text' name='email' id='email' />
+<br> -->
 Password: <input type='password' name='password' id='password' />
 <br>
 <input type='submit' value='Login' id='login_form' />
 
 <script>
+  console.log(document.cookie)
   $("#login_form").on("click", function(e) {
     var username = $("#username").val();
     var password = $("#password").val();
-    var email = $('#email').val();
 
-    $.post("/accounts/login/", {"username": username, "password": password, "email" : email})
-      .success(function(data) {
+    $.ajax({
+      url : "/accounts/login/",
+      type : 'post',
+      data : {
+        "username" : username,
+        "password" : password
+      },
+      dataType : 'json',
+      success: function(data){
         var token = data["key"];
         document.cookie = 'token='+token+";path=/";
-        window.location.href = "/";
-      });
+        window.location.href = "/user_details/";
+      }
+    });
   });
 </script>

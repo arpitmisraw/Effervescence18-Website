@@ -1,0 +1,40 @@
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+{% csrf_token %}
+Username: <input type='text' name='username' id='username' />
+<br>
+Email: <input type='email' name='email' id='email' />
+<br>
+
+Password1: <input type='password' name='password1' id='password1' />
+<br>
+
+Password2: <input type='password' name='password2' id='password2' />
+<br>
+<input type='submit' value='Login' id='login_form' />
+
+<script>
+  console.log(document.cookie)
+  $("#login_form").on("click", function(e) {
+    var username = $("#username").val();
+    var email = $("#email").val();
+    var password1 = $("#password1").val();
+    var password2 = $("password2").val();
+    $.ajax({
+      url : "/accounts/registration/",
+      type : 'post',
+      data : {
+        "username" : username,
+        "email" : email,
+        "password1" : password1,
+        "password2" : password2
+      },
+      dataType : 'json',
+      success: function(data){
+        var token = data["key"];
+        document.cookie = 'token='+token+";path=/";
+        window.location.href = "/user_details/";
+      }
+    });
+  });
+</script>

@@ -28,18 +28,21 @@ Birthday: <input type='text' name='birthday' id='birthday' />
     var gender = $('#gender').val();
     var birthday = $('#birthday').val();
 
+    console.log(document.token);
+
     $.ajax({
       url : "/create_regular_user/",
       type : 'post',
+      beforeSend : function(request){
+        request.setRequestHeader("Authorization",
+          "Token 7e81a32b09678eab78a6f49268b2d059a51925d2")
+      },
       data : {
         "name": name, 
         "college": college, 
         "phone" : phone,
         "gender" : gender,
         "birthday" : birthday
-      },
-      headers : {
-        'Authorization' : 'Token 0c73a7e12dd00da9889afc28df6292bd712b1675'
       },
       dataType : 'json',
       success: function(data){

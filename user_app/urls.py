@@ -16,5 +16,7 @@ urlpatterns = [
 	path('update_regular_user/', views.GetAndUpdateRegularUser.as_view()),
 	path('obtain_auth/', rest_framework_views.obtain_auth_token),
 	path('user_login/', views.login),
+	path('user_logout/', views.logout, name = 'user_logout'),
+	path('new_user/', views.new_user, name = 'new_user'),
 	path('user_details/', views.user_details),
 ]

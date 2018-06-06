@@ -53,10 +53,8 @@ def login_view(request):
 
 
 def index(request):
-	print(request.user)
 	if request.user.is_authenticated:
 		current_user = RegularUser.objects.filter(user = request.user)
-		print(current_user)
 		context = {'current_user' : current_user, 'name' : current_user[0].name}
 		return render(request, 'user_app/index.html', context)
 	else:
@@ -154,6 +152,15 @@ class GetAndUpdateRegularUser(generics.RetrieveUpdateAPIView):
 
 def login(request):
 	return render(request, 'register/user_login.html', {})
+
+
+def logout(request):
+	return render(request, 'register/user_logout.html', {})
+
+
+def new_user(request):
+	return render(request, 'register/new_user.html', {})
+	
 
 def user_details(request):
 	return render(request, 'register/user_details.html', {})

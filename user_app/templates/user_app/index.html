@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-2" style="text-align: center;">
 				<p>
-					<a href="{% url 'logout' %}">Logout</a>
+					<a href="{% url 'user_logout' %}">Logout</a>
 				</p>
 			</div>
 			
@@ -92,7 +92,9 @@
 	{% endfor %}
 
 <script type="text/javascript">
-	console.log(document.cookie)
+	var word = "ArpitMishsra";
+	var check = word.slice(2, );
+	console.log(document.cookie, check);
 </script>
 
 	
