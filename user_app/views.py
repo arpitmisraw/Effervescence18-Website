@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegularUserSerializer, LoginSerializer, UserDetailSerializer, RegularUserDetailSerializer
+from .serializers import UserSerializer, RegularUserSerializer, UserDetailSerializer, RegularUserDetailSerializer, RegularUserUpdateSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -111,6 +111,22 @@ def register(request):
 # API VIEWS
 
 
+# class UserCreate(APIView):
+#     serializer_class = UserSerializer
+
+#     def post(self, request, format='json'):
+#         serializer = UserSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.save()sss
+#             token = Token.objects.get_or_create(user = request.user)
+#             regular_user.referral = 'FE' + str(token)[:8]
+#             regular_user.save()
+#             if regular_user:
+#                 json = serializer.data
+#                 return Response(json, status=status.HTTP_201_CREATED)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class RegularUserCreate(APIView):
     serializer_class = RegularUserSerializer
@@ -129,6 +145,8 @@ class RegularUserCreate(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    
+
     def get(self, request, format = None):
     	regular_user = RegularUser.objects.get(user = request.user)
     	json = {
@@ -141,6 +159,40 @@ class RegularUserCreate(APIView):
     		'referral' : regular_user.referral,
     	}
     	return Response(json)
+
+class RegularUserUpdate(APIView):
+	serializer_class = RegularUserUpdateSerializer
+
+
+	# def post(self, request, format='json'):
+ #        serializer = RegularUserSerializer(data=request.data)
+ #        if serializer.is_valid():
+ #            regular_user = serializer.save()
+ #            regular_user.user = request.user
+ #            token = Token.objects.get(user = request.user)
+ #            regular_user.referral = 'FE' + str(token)[:8]
+ #            regular_user.save()
+ #            if regular_user:
+ #                json = serializer.data
+ #                return Response(json, status=status.HTTP_201_CREATED)
+
+ #        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	# def get_queryset(self):
+	# 	regular_user = self.request.user
+	# 	return regular_user
+
+
+	
+	def post(self, request, format = 'json'):
+		serializer = RegularUserUpdateSerializer(data = request.data)
+		if serializer.is_valid():
+			# regular_user = RegularUser.objects.get(user = request.user)
+			regular_user = serializer.save()
+			if regular_user:
+				json = serializer.data
+				return Response(json, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class GetAndUpdateRegularUser(generics.RetrieveUpdateAPIView):
