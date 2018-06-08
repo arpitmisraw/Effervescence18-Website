@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import RegularUser
 from .forms import UserForm, LoginForm, CredentialForm
 from django.contrib.auth import authenticate, login, logout
@@ -160,39 +160,13 @@ class RegularUserCreate(APIView):
     	}
     	return Response(json)
 
-class RegularUserUpdate(APIView):
+class RegularUserUpdate(generics.UpdateAPIView):
 	serializer_class = RegularUserUpdateSerializer
 
-
-	# def post(self, request, format='json'):
- #        serializer = RegularUserSerializer(data=request.data)
- #        if serializer.is_valid():
- #            regular_user = serializer.save()
- #            regular_user.user = request.user
- #            token = Token.objects.get(user = request.user)
- #            regular_user.referral = 'FE' + str(token)[:8]
- #            regular_user.save()
- #            if regular_user:
- #                json = serializer.data
- #                return Response(json, status=status.HTTP_201_CREATED)
-
- #        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-	# def get_queryset(self):
-	# 	regular_user = self.request.user
-	# 	return regular_user
-
-
-	
-	def post(self, request, format = 'json'):
-		serializer = RegularUserUpdateSerializer(data = request.data)
-		if serializer.is_valid():
-			# regular_user = RegularUser.objects.get(user = request.user)
-			regular_user = serializer.save()
-			if regular_user:
-				json = serializer.data
-				return Response(json, status=status.HTTP_201_CREATED)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	def get_object(self):
+		queryset = RegularUser.objects.all()
+		obj = get_object_or_404(queryset, user = self.request.user)
+		return obj
 
 
 class GetAndUpdateRegularUser(generics.RetrieveUpdateAPIView):

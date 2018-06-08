@@ -57,16 +57,7 @@ class RegularUserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegularUser
         exclude = ['user', 'referral']
-    def create(self, validated_data):
-        regular_user = RegularUser(
-            name = validated_data["name"],
-            college = validated_data["college"],
-            birthday = validated_data["birthday"],
-            gender = validated_data["gender"],
-            phone = validated_data["phone"],
-        )
-        regular_user.save()
-        return regular_user
+    
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
