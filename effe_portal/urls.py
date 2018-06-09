@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('user_app.urls')),
     path('api/', include('rest_auth.urls')),
     path('api/registration/', include('rest_auth.registration.urls')),
-    path('user_accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('auth/', include('rest_framework_social_oauth2.urls')),
 ]

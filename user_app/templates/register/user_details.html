@@ -21,6 +21,10 @@ Birthday: <input type='text' name='birthday' id='birthday' />
 
 
 <script>
+
+  var token_re = /token=\w+/
+  var token = token_re.exec(document.cookie)
+
   $("#login_form").on("click", function(e) {
     var name = $("#name").val();
     var college = $("#college").val();
@@ -28,14 +32,12 @@ Birthday: <input type='text' name='birthday' id='birthday' />
     var gender = $('#gender').val();
     var birthday = $('#birthday').val();
 
-    console.log(document.token);
-
     $.ajax({
-      url : "/create_regular_user/",
+      url : "/api/regular_user/",
       type : 'post',
       beforeSend : function(request){
         request.setRequestHeader("Authorization",
-          "Token cc28ec770f15fcfa9e52b3f5c97a6fc82f78ebe7")
+          "Token " + token[0].slice(6,));
       },
       data : {
         "name": name, 

@@ -1,4 +1,24 @@
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+
 <script>
-document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
+	$.ajax({
+      url : "/api/logout/",
+      type : 'get',
+      // data : {
+      //   "username" : username,
+      //   "password" : password
+      // },
+      // dataType : 'json',
+      success: function(data){
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
 location.href="/user_login/";
+      },
+      error: function(MLHttpRequest, textStatus, errorThrown){
+        alert("Username or Password entered is wrong!");
+        window.location.href = "/user_login/";
+      }
+    });
+
 </script>

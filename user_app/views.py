@@ -39,6 +39,16 @@ def index(request):
 # API VIEWS
 
 
+class UserAPIView(APIView):
+	serializer_class = UserDetailSerializer
+
+	def get(self, request, format = 'json'):
+		username = request.user.username
+		json = {
+			'user' : username
+		}
+		return Response(json)
+
 class RegularUserAPI(APIView):
     serializer_class = RegularUserSerializer
 
@@ -47,7 +57,11 @@ class RegularUserAPI(APIView):
         if serializer.is_valid():
             regular_user = serializer.save()
             regular_user.user = request.user
-            token = Token.objects.get(user = request.user)
+            try:
+            	token = Token.objects.get(user = request.user)
+            except:
+            	token = request.META.get('HTTP_AUTHORIZATION')[7:]
+            # print(request.META)	
             regular_user.referral = 'FE' + str(token)[:8]
             regular_user.save()
             if regular_user:
@@ -75,6 +89,7 @@ class RegularUserAPI(APIView):
     	regular_user = RegularUser.objects.get(user = request.user)
     	serializer = RegularUserSerializer(regular_user, data = request.data, partial = True)
     	if serializer.is_valid():
+    		print(request.META.get('HTTP_AUTHORIZATION'))
     		serializer.save()
     		return Response(serializer.data, status = status.HTTP_200_OK)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

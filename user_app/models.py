@@ -27,4 +27,14 @@ class RegularUser(models.Model):
 		return self.name
 
 
+class Event(models.Model):
+	event_name = models.CharField(max_length = 100)
+	prize = models.IntegerField(null = True)
+	description = models.TextField()
+	points = models.IntegerField(null = True)
+
+	def __str__(self):
+		return self.event_name
+
+
 
