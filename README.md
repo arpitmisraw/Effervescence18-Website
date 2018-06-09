@@ -12,11 +12,11 @@
 
 ### Authentication is done using the django-rest-auth library. Following are the end-points:
 
-Login - /api/login/
-Logout - /api/logout/
-Password Change - /api/password/change/
-User details - /api/user/
-Register new user - /api/registration/
+1. Login - /api/login/
+2. Logout - /api/logout/
+3. Password Change - /api/password/change/
+4. User details - /api/user/
+5. Register new user - /api/registration/
 
 
 ### For social authentication, the login access token has to be provided(PUSH) to the following end-point:
