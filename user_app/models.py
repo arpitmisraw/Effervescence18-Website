@@ -7,10 +7,6 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
 
 class RegularUser(models.Model):
 	gender_options = (
@@ -21,7 +17,6 @@ class RegularUser(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE, null = True)
 	name = models.CharField(max_length = 40)
 	college = models.TextField()
-	check = models.BooleanField(default = False)
 	birthday = models.DateField(default = timezone.now, null = True)
 	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
 	phone = models.CharField(max_length = 10, null = True)
@@ -30,4 +25,6 @@ class RegularUser(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
 

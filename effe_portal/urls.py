@@ -23,8 +23,8 @@ from rest_auth.views import (
 urlpatterns = [
     re_path(r'^', include('django.contrib.auth.urls')),
     path('', include('user_app.urls')),
-    path('accounts/', include('rest_auth.urls')),
-    path('accounts/registration/', include('rest_auth.registration.urls')),
+    path('api/', include('rest_auth.urls')),
+    path('api/registration/', include('rest_auth.registration.urls')),
     path('user_accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -19,38 +19,9 @@ from rest_framework import viewsets
 
 
 
-# NORMAL VIEWS
-
-def log_out(request):
-	logout(request)
-	return redirect('login')
-
-def login_view(request):
-	print(request.user)
-	if request.method == 'POST':
-		form = LoginForm(request.POST)
-		user = User(username = request.POST['username'], password = request.POST['password'])
-		user = authenticate(username = user.username, password = user.password)
-
-		if user is not None:
-			if user.is_active:
-				login(request, user)
-				return redirect('index')
-		else:
-			print("Too bad")
-			form = LoginForm()
-			context = {'form' : form}
-			return render(request, 'user_app/login_form.html', context)
 
 
-			
-
-	else:
-		form = LoginForm()
-	context = {'form' : form}
-	return render(request, 'user_app/login_form.html', context)
-
-
+# Homepage View
 
 def index(request):
 	if request.user.is_authenticated:
@@ -58,77 +29,17 @@ def index(request):
 		context = {'current_user' : current_user, 'name' : current_user[0].name}
 		return render(request, 'user_app/index.html', context)
 	else:
-		return redirect('login')
+		return redirect('user_login')
 
 
-def credentials(request):
-	if request.user.is_anonymous:
-		return redirect('register')
-	elif RegularUser.objects.filter(user = request.user).exists():
-		regular_user = RegularUser.objects.filter(user = request.user).first()
-		form = CredentialForm(instance = regular_user)
-		return render(request, 'user_app/credentials.html', {'form' : form})
-	else:
-		if request.method == 'POST':
-			form = CredentialForm(request.POST)
 
-			if form.is_valid():
-				regular_user = form.save(commit = False)
-				regular_user.user = request.user
-				regular_user.save()
-				return redirect('index')
-			return render(request, 'user_app/index.html', {'form' : form})
-		else:
-			form = CredentialForm()
-			return render(request, 'user_app/credentials.html', {'form' : form})
-
-
-def register(request):
-	if request.method == 'POST':
-		form = UserForm(request.POST)
-
-		if form.is_valid():
-			user = form.save(commit = False)
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password']
-			user.set_password(password)
-
-			user.save()
-			token = Token.objects.create(user=user)
-			user = authenticate(username = username, password = password)
-
-			if user is not None:
-				if user.is_active:
-					login(request, user)
-					return redirect('credentials')
-		return render(request, 'user_app/registration_form.html', {'form' : form})
-	else:
-		form = UserForm()
-		return render(request, 'user_app/registration_form.html', {'form' : form})
 
 
 
 # API VIEWS
 
 
-# class UserCreate(APIView):
-#     serializer_class = UserSerializer
-
-#     def post(self, request, format='json'):
-#         serializer = UserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             user = serializer.save()sss
-#             token = Token.objects.get_or_create(user = request.user)
-#             regular_user.referral = 'FE' + str(token)[:8]
-#             regular_user.save()
-#             if regular_user:
-#                 json = serializer.data
-#                 return Response(json, status=status.HTTP_201_CREATED)
-
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class RegularUserCreate(APIView):
+class RegularUserAPI(APIView):
     serializer_class = RegularUserSerializer
 
     def post(self, request, format='json'):
@@ -160,21 +71,19 @@ class RegularUserCreate(APIView):
     	}
     	return Response(json)
 
-class RegularUserUpdate(generics.UpdateAPIView):
-	serializer_class = RegularUserUpdateSerializer
-
-	def get_object(self):
-		queryset = RegularUser.objects.all()
-		obj = get_object_or_404(queryset, user = self.request.user)
-		return obj
-
-
-class GetAndUpdateRegularUser(generics.RetrieveUpdateAPIView):
-	queryset = RegularUser.objects.all()
-	serializer_class = RegularUserSerializer
-	lookup_field = 'name'
+    def put(self, request, format = 'json'):
+    	regular_user = RegularUser.objects.get(user = request.user)
+    	serializer = RegularUserSerializer(regular_user, data = request.data, partial = True)
+    	if serializer.is_valid():
+    		serializer.save()
+    		return Response(serializer.data, status = status.HTTP_200_OK)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+
+
+# Form Views
 
 def login(request):
 	return render(request, 'register/user_login.html', {})

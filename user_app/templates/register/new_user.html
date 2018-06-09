@@ -21,13 +21,13 @@ Password2: <input type='password' name='password2' id='password2' />
     var password1 = $("#password1").val();
     var password2 = $("password2").val();
     $.ajax({
-      url : "/accounts/registration/",
+      url : "/api/registration/",
       type : 'post',
       data : {
         "username" : username,
         "email" : email,
         "password1" : password1,
-        "password2" : password2
+        "password2" : password2,
       },
       dataType : 'json',
       success: function(data){

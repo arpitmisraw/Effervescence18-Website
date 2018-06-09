@@ -16,7 +16,7 @@ Password: <input type='password' name='password' id='password' />
     var password = $("#password").val();
 
     $.ajax({
-      url : "/accounts/login/",
+      url : "/api/login/",
       type : 'post',
       data : {
         "username" : username,
@@ -26,7 +26,7 @@ Password: <input type='password' name='password' id='password' />
       success: function(data){
         var token = data["key"];
         document.cookie = 'token='+token+";path=/";
-        window.location.href = "/user_details/";
+        window.location.href = "/";
       }
     });
   });
