@@ -6,10 +6,10 @@ Username: <input type='text' name='username' id='username' />
 Email: <input type='email' name='email' id='email' />
 <br>
 
-Password1: <input type='password' name='password1' id='password1' />
+Password1: <input type='password' name='password1' id='password1'/>
 <br>
 
-Password2: <input type='password' name='password2' id='password2' />
+Password2: <input type='password' name='password2' id='password2'/>
 <br>
 <input type='submit' value='Login' id='login_form' />
 
@@ -20,6 +20,7 @@ Password2: <input type='password' name='password2' id='password2' />
     var email = $("#email").val();
     var password1 = $("#password1").val();
     var password2 = $("password2").val();
+    console.log(username, email, password1, password2);
     $.ajax({
       url : "/api/registration/",
       type : 'post',

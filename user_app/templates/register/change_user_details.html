@@ -36,7 +36,7 @@ Birthday: <input type='text' name='birthday' id='birthday' />
 
     $.ajax({
       url : "/api/regular_user/",
-      type : 'post',
+      type : 'put',
       beforeSend : function(request){
         request.setRequestHeader("Authorization",
           "Token " + token);
@@ -50,21 +50,10 @@ Birthday: <input type='text' name='birthday' id='birthday' />
       },
       dataType : 'json',
       success: function(data){
-        window.location.href = "/user_login/";
+        window.location.href = "/";
       }
     });
   });
 
-  //   $.post("/create_regular_user/", {
-  //     "name": name, 
-  //     "college": college, 
-  //     "phone" : phone,
-  //     "gender" : gender,
-  //     "birthday" : birthday
-  //   }).success(function(data) {
-  //       var token = data["key"];
-  //       document.cookie = 'token='+token+";path=/";
-  //       window.location.href = "/";
-  //     });
-  // });
+  
 </script>

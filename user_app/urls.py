@@ -19,7 +19,7 @@ urlpatterns = [
 	path('user_logout/', views.logout, name = 'user_logout'),
 	path('set_new_user/', views.new_user, name = 'new_user'),
 	path('set_user_details/', views.user_details, name = 'set_user_details'),
-
+	path('change_user_details/', views.change_user_details, name = 'change_user_details'),
 
 	path('user_detail/', views.UserAPIView.as_view()),
 ]

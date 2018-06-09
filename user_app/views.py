@@ -115,7 +115,8 @@ def new_user(request):
 def user_details(request):
 	return render(request, 'register/user_details.html', {})
 
-
+def change_user_details(request):
+	return render(request, 'register/change_user_details.html', {})
 
 
 
