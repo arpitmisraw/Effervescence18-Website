@@ -49,6 +49,7 @@
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
+    console.log("Hello");
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -56,6 +57,7 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+      console.log("Doing Stuff now!!");
     } else {
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -68,7 +70,9 @@
   // code below.
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
+      console.log("CheckLoginState");
       statusChangeCallback(response);
+
     });
   }
 
@@ -124,34 +128,13 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
+      console.log('Successful login for   :   ' + response.name);
+      console.log("Hello");
+      console.log(accessToken); 
+
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
-        console.log("Hello");
-        console.log(accessToken);
-
-
-    // $.ajax({
-    //   url : "/auth/convert-token/",
-    //   type : 'post',
-    //   data : {
-    //     "grant_type" : "convert_token",
-    //     "client_id" : "nEm8LfLUjE4YIqPxXVT04ISRGqbBXzngpxH2mzPe",
-    //     "backend" : "facebook",
-    //     "client_secret"
-    //   },
-    //   dataType : 'json',
-    //   success: function(data){
-    //     var token = data["key"];
-    //     document.cookie = 'token='+token+";path=/";
-    //     window.location.href = "/";
-    //   },
-    //   error: function(MLHttpRequest, textStatus, errorThrown){
-    //     alert("Username or Password entered is wrong!");
-    //     window.location.href = "/user_login/";
-    //   }
-    // });
-
+        
     });
   }
 

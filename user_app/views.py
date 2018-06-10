@@ -32,7 +32,8 @@ def index(request):
 		return redirect('user_login')
 
 
-
+def index2(request):
+	return render(request, 'user_app/index2.html', {})
 
 
 
@@ -72,18 +73,20 @@ class RegularUserAPI(APIView):
 
     
 
-    def get(self, request, format = None):
+    def get(self, request, format = 'json'):
     	regular_user = RegularUser.objects.get(user = request.user)
-    	json = {
-    		'name' : regular_user.name,
-    		'college' : regular_user.college,
-    		'check' : regular_user.check,
-    		'birthday' : regular_user.birthday,
-    		'gender' : regular_user.gender,
-    		'phone' : regular_user.phone,
-    		'referral' : regular_user.referral,
-    	}
-    	return Response(json)
+    	serializer = RegularUserSerializer(regular_user)
+    	return Response(serializer.data, status = status.HTTP_200_OK)
+    	# json = {
+    	# 	'name' : regular_user.name,
+    	# 	'college' : regular_user.college,
+    	# 	'check' : regular_user.check,
+    	# 	'birthday' : regular_user.birthday,
+    	# 	'gender' : regular_user.gender,
+    	# 	'phone' : regular_user.phone,
+    	# 	'referral' : regular_user.referral,
+    	# }
+    	# return Response(json)
 
     def put(self, request, format = 'json'):
     	regular_user = RegularUser.objects.get(user = request.user)

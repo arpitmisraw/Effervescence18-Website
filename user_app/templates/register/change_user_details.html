@@ -27,6 +27,37 @@ Birthday: <input type='text' name='birthday' id='birthday' />
   console.log(document.cookie);
   console.log(token);
 
+
+
+  $.ajax({
+    url : "/api/regular_user/",
+    type : 'get',
+    beforeSend : function(request){
+      request.setRequestHeader("Authorization",
+        "Token " + token);
+    },
+    
+    dataType : 'json',
+    success: function(data){
+      var name = data['name'];
+      $('#name').val(name);
+      var college = data['college'];
+      $("#college").val(college);
+      var phone = data['phone'];
+      $('#phone').val(phone);
+      var gender = data['gender'];
+      $('#gender').val(gender);
+      var birthday = data['birthday'];
+      $('#birthday').val(birthday);
+    },
+    error: function(MLHttpRequest, textStatus, errorThrown){
+      alert("Please log in again!");
+      window.location.href = "/user_login/";
+    },
+  });
+
+  
+
   $("#login_form").on("click", function(e) {
     var name = $("#name").val();
     var college = $("#college").val();

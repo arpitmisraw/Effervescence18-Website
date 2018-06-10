@@ -10,6 +10,7 @@ urlpatterns = [
 
 	# homepage
 	path('', views.index, name = 'index'),
+	path('index/', views.index2, name = 'index2'),
 
 	# url for API for user details
 	path('api/regular_user/', views.RegularUserAPI.as_view(), name = 'regular_user'),
