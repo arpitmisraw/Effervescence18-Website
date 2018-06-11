@@ -9,8 +9,8 @@ from rest_framework.authtoken import views as rest_framework_views
 urlpatterns = [
 
 	# homepage
-	path('', views.index, name = 'index'),
-	path('index/', views.index2, name = 'index2'),
+	path('index/', views.index, name = 'index'),
+	path('', views.homepage, name = 'homepage'),
 
 	# url for API for user details
 	path('api/regular_user/', views.RegularUserAPI.as_view(), name = 'regular_user'),

@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>
+		All Entries
+	</title>
+{% endblock %}
+
+
+{% block body %}
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js">
+	// Add jquery
+</script>
+
+
+
+
+	<h1>Hello <span class="greetings"></span></h1>
+
+	<div class="container-fluid">
+		<div class="row align-items-center">
+			<div class="col-2 offset-8" style="text-align: center;">
+				<p>
+					<a href="{% url 'change_user_details' %}">Change profile</a>
+				</p>
+			</div>
+			<div class="col-2" style="text-align: center;">
+				<p>
+					<a href="{% url 'user_logout' %}">Logout</a>
+				</p>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="container entry">
+			<div class="row">
+				<div class="col-12">
+					<h4>
+						Name
+					</h4>
+					<h2 class="info-name">
+					</h2>
+					<hr>
+
+					<h4>
+						College
+					</h4>
+					<h2 class="info-college">
+						{{ u.college }}
+					</h2>
+					<hr>
+
+					<h4>
+						Birthday
+					</h4>
+					<h2 class="info-birthday">
+						{{ u.birthday }}
+					</h2>
+					<hr>
+
+
+					<h4>
+						Gender
+					</h4>
+					<h2 class="info-gender">
+						{{ u.gender }}
+					</h2>
+					<hr>
+
+					<h4>
+						Phone
+					</h4>
+					<h2 class="info-phone">
+						{{ u.phone }}
+					</h2>
+					<hr>
+						
+				</div>		
+			</div>		
+		</div>
+
+
+
+
+<script>
+
+
+	// Get token from cookie
+	var token_re = / token=\w+/
+	var token = token_re.exec(document.cookie);
+	if(token == null){
+		token = '';
+	}
+	else{
+		token = token[0].slice(7,);
+	}
+  
+
+
+
+	// Get json data using token
+	$.ajax({
+	  url : "/api/regular_user/",
+	  type : 'get',
+	  beforeSend : function(request){
+	    request.setRequestHeader("Authorization",
+	      "Token " + token);
+	  },
+	  
+	  dataType : 'json',
+	  success: function(data){
+  	      var name = data['name'];
+  	      $('.greetings').text(name);   
+  	      $('.info-name').text(name); 	    
+	      
+
+	      var college = data['college'];
+	      $('.info-college').text(college);
+	      
+
+	      var phone = data['phone'];
+	      $('.info-phone').text(phone);
+	      
+
+	      var gender = data['gender'];
+	      if(gender == 'M'){
+	      	gender = 'Male';
+	      }
+	      else if(gender = 'F'){
+	      	gender = 'Female';
+	      }
+	      else{
+	      	gender = 'Other';
+	      }
+	      $('.info-gender').text(gender);
+	      
+
+	      var birthday = data['birthday'];
+	      $('.info-birthday').text(birthday);
+	  },
+	  error: function(MLHttpRequest, textStatus, errorThrown){
+	    alert("Please log in again!");
+	    window.location.href = "/user_login/";
+	  },
+	});
+
+
+</script>
+
+
+
+
+
+{% endblock %}

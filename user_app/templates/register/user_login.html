@@ -190,7 +190,7 @@
       dataType : 'json',
       success: function(data){
         var token = data["key"];
-        document.cookie = 'token='+token+";path=/";
+        document.cookie = ' token='+token+";path=/";
         window.location.href = "/";
       },
       error: function(MLHttpRequest, textStatus, errorThrown){

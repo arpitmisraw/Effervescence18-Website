@@ -50,21 +50,11 @@ Birthday: <input type='text' name='birthday' id='birthday' />
       },
       dataType : 'json',
       success: function(data){
+        alert('Thanks for signing up. Please login again.');
         window.location.href = "/user_login/";
       }
     });
   });
 
-  //   $.post("/create_regular_user/", {
-  //     "name": name, 
-  //     "college": college, 
-  //     "phone" : phone,
-  //     "gender" : gender,
-  //     "birthday" : birthday
-  //   }).success(function(data) {
-  //       var token = data["key"];
-  //       document.cookie = 'token='+token+";path=/";
-  //       window.location.href = "/";
-  //     });
-  // });
+  
 </script>
