@@ -1,31 +1,49 @@
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Change User Details</title>
+  
+  
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+
+  
+</head>
+
+<body>
+
 
 {% csrf_token %}
-Name: <input type='text' name='name' id='name' />
-<br>
+  <div class="wrapper">
+  <div class="container">
+    <h1>Change User Details</h1>
+    
+    <form class="form">
 
-College: <input type='text' name='college' id='college' />
-<br>
-
-Phone: <input type='text' name='phone' id='phone' />
-<br>
-
-Gender: <input type='text' name='gender' id='gender' />
-<br>
+    <input type='text' name='name' id='name' placeholder="Name" />
+    <input type='text' name='college' id='college' placeholder="College" />
+    <input type='text' name='phone' id='phone' placeholder="Phone" />
+    <input type='text' name='gender' id='gender' placeholder="Gender" />
+    <input type='text' name='birthday' id='birthday' placeholder="Birthday" />
 
 
-Birthday: <input type='text' name='birthday' id='birthday' />
-<br>
+      <button type="submit" id="login-button" class="login_form">Save</button>
+    </form>
+  </div>
+  
 
-<input type='submit' value='Login' id='login_form' />
-
+</div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script  src="{% static 'login/js/index.js' %}"></script>
 
 <script>
 
-  var token_re = / token=\w+/
-  var token = token_re.exec(document.cookie)[0].slice(7,);
-  console.log(document.cookie);
-  console.log(token);
+  var token = localStorage.getItem("token");
+  if(token == null){
+    token = '';
+  }
 
 
 
@@ -58,7 +76,7 @@ Birthday: <input type='text' name='birthday' id='birthday' />
 
   
 
-  $("#login_form").on("click", function(e) {
+  $(".login_form").on("click", function(e) {
     var name = $("#name").val();
     var college = $("#college").val();
     var phone = $('#phone').val();
@@ -88,3 +106,11 @@ Birthday: <input type='text' name='birthday' id='birthday' />
 
   
 </script>
+
+
+
+</body>
+
+</html>
+
+

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import RegularUser
+from .models import RegularUser, Event
 from .forms import UserForm, LoginForm, CredentialForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegularUserSerializer, UserDetailSerializer, RegularUserDetailSerializer, RegularUserUpdateSerializer
+from .serializers import UserSerializer, RegularUserSerializer, UserDetailSerializer, RegularUserDetailSerializer, RegularUserUpdateSerializer, EventSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -74,9 +74,10 @@ class RegularUserAPI(APIView):
     
 
     def get(self, request, format = 'json'):
-    	regular_user = RegularUser.objects.get(user = request.user)
-    	serializer = RegularUserSerializer(regular_user)
-    	return Response(serializer.data, status = status.HTTP_200_OK)
+        regular_user = RegularUser.objects.get(user = request.user)
+        serializer = RegularUserSerializer(regular_user)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
     	
 
     def put(self, request, format = 'json'):
@@ -89,6 +90,9 @@ class RegularUserAPI(APIView):
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class EventViewSet(viewsets.ModelViewSet):
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
 
 
 
@@ -111,6 +115,9 @@ def user_details(request):
 
 def change_user_details(request):
 	return render(request, 'register/change_user_details.html', {})
+
+def index_login(request):
+    return render(request, 'register/index.html', {})
 
 
 

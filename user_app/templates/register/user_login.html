@@ -30,6 +30,8 @@
       margin:25px;
       /*width: 300px;*/
     }
+
+    
   </style>
 
 {% endblock %}
@@ -190,11 +192,12 @@
       dataType : 'json',
       success: function(data){
         var token = data["key"];
+        localStorage.setItem("token", token);
         document.cookie = ' token='+token+";path=/";
         window.location.href = "/";
       },
-      error: function(MLHttpRequest, textStatus, errorThrown){
-        alert("Username or Password entered is wrong!");
+      error: function(request, textStatus, errorThrown){
+        alert(request.responseJSON['non_field_errors']);
         window.location.href = "/user_login/";
       }
     });
