@@ -103,8 +103,14 @@
 	  url : "/api/regular_user/",
 	  type : 'get',
 	  beforeSend : function(request){
-	    request.setRequestHeader("Authorization",
-	      "Token " + token);
+	  	if(localStorage["type"] == "fb"){
+		    request.setRequestHeader("Authorization",
+		      "Bearer " + token);
+		}
+		else{
+			request.setRequestHeader("Authorization",
+		      "Token " + token);
+		}
 	  },
 	  
 	  dataType : 'json',
@@ -126,7 +132,7 @@
 	      if(gender == 'M'){
 	      	gender = 'Male';
 	      }
-	      else if(gender = 'F'){
+	      else if(gender == 'F'){
 	      	gender = 'Female';
 	      }
 	      else{
@@ -139,7 +145,13 @@
 	      $('.info-birthday').text(birthday);
 	  },
 	  error: function(MLHttpRequest, textStatus, errorThrown){
-	    alert("Please log in again!");
+	  	// alert(localStorage["token"])
+	   //  alert(MLHttpRequest.textJSON);
+
+	   if(localStorage["token"] != ' '){
+	   	window.location.href = "/set_user_details/";
+	   }
+	   else
 	    window.location.href = "/user_login/";
 	  },
 	});

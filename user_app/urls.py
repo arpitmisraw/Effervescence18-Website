@@ -27,6 +27,7 @@ urlpatterns = [
 	path('change_user_details/', views.change_user_details, name = 'change_user_details'),
 	path('', include(router.urls)),
 	path('index_login/', views.index_login),
+	# path('check_details/', views.check_details),
 
 	path('user_detail/', views.UserAPIView.as_view()),
 ]

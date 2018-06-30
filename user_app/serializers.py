@@ -62,7 +62,7 @@ class RegularUserUpdateSerializer(serializers.ModelSerializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'pk']
+        fields = '__all__'
 
 class RegularUserDetailSerializer(serializers.ModelSerializer):
     class Meta:

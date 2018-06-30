@@ -46,7 +46,7 @@ class UserAPIView(APIView):
 	def get(self, request, format = 'json'):
 		username = request.user.username
 		json = {
-			'user' : username
+			'username' : username
 		}
 		return Response(json)
 
@@ -120,6 +120,8 @@ def index_login(request):
     return render(request, 'register/index.html', {})
 
 
+# def check_details(request):
+#     if
 
 
 

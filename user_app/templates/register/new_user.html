@@ -17,6 +17,15 @@
 
 {% csrf_token %}
   <div class="wrapper">
+<!-- <div class="container-fluid card">
+      <div class="row card-row">
+        <div class="col-xs-0 col-md-4"></div>
+        <div class="col-xs-12 col-md-4">
+        </div>
+      </div>
+    </div> -->
+
+
   <div class="container">
     <h1>Create New User</h1>
     
@@ -31,7 +40,22 @@
 
       <button type="submit" id="login-button" class="login_form">Create User</button>
     </form>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12" style="text-align: center; margin-top: 60px;">
+          <p class="register-user">Existing User? &ensp;   
+          <a href="{% url 'user_login' %}" class="register-link">Login</a>
+        </p>
+        </div>
+      </div>
+    </div>
   </div>
+
+  
+
+
+    
   
 
 </div>
@@ -58,11 +82,12 @@
       success: function(data){
         var token = data["key"];
         localStorage.setItem("token", token);
-        document.cookie = ' token='+token+";path=/";
         window.location.href = "/set_user_details/";
       },
       error: function(MLHttpRequest, textStatus, errorThrown){
-      alert("Passwords don't match");
+      for(key in MLHttpRequest.responseJSON){
+          alert(MLHttpRequest.responseJSON[key]);
+        }
       window.location.href = "/set_new_user/";
     },
     });

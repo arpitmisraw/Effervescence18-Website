@@ -17,33 +17,84 @@
 
 {% csrf_token %}
   <div class="wrapper">
-  <div class="container">
-    <h1>Change User Details</h1>
+  <div class="container" style="height: 800px;">
+    <h1>Set User Details</h1>
     
     <form class="form">
-
+    <input type="text" name="username" id="username" placeholder="Username" disabled="disabled">
     <input type='text' name='name' id='name' placeholder="Name" />
     <input type='text' name='college' id='college' placeholder="College" />
     <input type='text' name='phone' id='phone' placeholder="Phone" />
-    <input type='text' name='gender' id='gender' placeholder="Gender" />
+    <input type='text' name='gender' id='gender' placeholder="Gender" readonly="readonly" />
+    <ul style="list-style: none; position: relative; top: 0;" class="dropdown dropdown-display">
+      <li class="male gender-element">Male</li>
+      <li class="female gender-element">Female</li>
+      <li class="other gender-element">Other</li>
+    </ul>
     <input type='text' name='birthday' id='birthday' placeholder="Birthday" />
 
 
       <button type="submit" id="login-button" class="login_form">Save</button>
     </form>
-  </div>
-  
 
-</div>
+    <div class="container-fluid" style="margin-top: 60px;">
+      <div class="row">
+        <div class="col-12" style="text-align: center;">
+          <p class="register-user">*All fields are necessary 
+          <!-- <a href="{% url 'new_user' %}" class="register-link">Register</a> -->
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script  src="{% static 'login/js/index.js' %}"></script>
 
 <script>
 
+
+
+//  $('#gender').on("click", function(){
+//   console.log("Hello");
+//   // dropdown.classList.toggle("dropdown-display");
+//  });
+
+//  $(".male").on("click", function(){
+//   $("#gender").val("M");
+// });
+
+// $(".female").on("click", function(){
+//   $("#gender").val("F");
+// });
+
+
+
+
   var token = localStorage.getItem("token");
   if(token == null){
     token = '';
   }
+
+
+  $.ajax({
+    url : "/user_detail/",
+    type : 'get',
+    beforeSend : function(request){
+      request.setRequestHeader("Authorization",
+        "Token " + token);
+    },
+    
+    dataType : 'json',
+    success: function(data){
+      var username = data['username'];
+      $('#username').val(username);
+    },
+    error: function(MLHttpRequest, textStatus, errorThrown){
+      alert("Please log in again!");
+      window.location.href = "/user_login/";
+    },
+  });
 
 
 
@@ -100,6 +151,12 @@
       dataType : 'json',
       success: function(data){
         window.location.href = "/";
+      },
+      error: function(MLHttpRequest, textStatus, errorThrown){
+        for(key in MLHttpRequest.responseJSON){
+          alert(MLHttpRequest.responseJSON[key]);
+        }
+        window.location.href = "/change_user_details/";
       }
     });
   });

@@ -3,6 +3,34 @@
 
 
 <script>
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '197091031013332',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.0'
+    });
+
+
+    FB.logout(function(response) {
+  // user is now logged out
+});
+    
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  
+
+
+
 	$.ajax({
       url : "/api/logout/",
       type : 'get',
@@ -12,7 +40,9 @@
 		location.href="/user_login/";
       },
       error: function(MLHttpRequest, textStatus, errorThrown){
-        alert("Username or Password entered is wrong!");
+        for(key in MLHttpRequest.responseJSON){
+          alert(MLHttpRequest.responseJSON[key]);
+        }
         window.location.href = "/user_login/";
       }
     });
