@@ -5,8 +5,8 @@ from rest_framework.authtoken import views as rest_framework_views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('events', views.EventViewSet, base_name = 'events')
-
+router.register('events', views.EventViewSet, base_name = 'event')
+router.register('events_update', views.EventUpdateAdminViewSet, base_name = 'event_update')
 
 
 
@@ -26,6 +26,7 @@ urlpatterns = [
 	path('set_user_details/', views.user_details, name = 'set_user_details'),
 	path('change_user_details/', views.change_user_details, name = 'change_user_details'),
 	path('', include(router.urls)),
+	re_path(r'^event_details/(?P<pk>[0-9]+)$', views.EventView.as_view()),
 	path('index_login/', views.index_login),
 	# path('check_details/', views.check_details),
 

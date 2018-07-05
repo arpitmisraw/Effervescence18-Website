@@ -15,6 +15,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.conf import settings
 from rest_framework import viewsets
+from rest_framework import generics
 
 
 
@@ -90,10 +91,18 @@ class RegularUserAPI(APIView):
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EventViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
 
+class EventUpdateAdminViewSet(viewsets.ModelViewSet):
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
+
+
+class EventView(generics.RetrieveAPIView):
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
 
 
 # Form Views

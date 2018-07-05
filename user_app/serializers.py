@@ -67,10 +67,13 @@ class UserDetailSerializer(serializers.ModelSerializer):
 class RegularUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegularUser
-        exclude = ['user']
+        exclude = '__all__'
 
 
-class EventSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+
+
+
