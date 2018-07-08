@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
-from .models import RegularUser
+from .models import RegularUser, Event
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -34,9 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-# class UserDetailSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         fields = '__all__'
 
 
 class RegularUserSerializer(serializers.ModelSerializer): 
@@ -65,9 +62,18 @@ class RegularUserUpdateSerializer(serializers.ModelSerializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'pk']
+        fields = '__all__'
 
 class RegularUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegularUser
-        exclude = ['user']
+        exclude = '__all__'
+
+
+class EventSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+
+
