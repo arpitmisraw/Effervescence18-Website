@@ -329,6 +329,8 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   display: flex;
 }
 
+
+
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
   color: #868e96;
 }
