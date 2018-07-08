@@ -24,15 +24,6 @@ from rest_framework import generics
 
 # Homepage View
 
-def index(request):
-	if request.user.is_authenticated:
-		current_user = RegularUser.objects.filter(user = request.user)
-		context = {'current_user' : current_user, 'name' : current_user[0].name}
-		return render(request, 'user_app/index.html', context)
-	else:
-		return redirect('user_login')
-
-
 def homepage(request):
 	return render(request, 'user_app/homepage.html', {})
 
@@ -125,12 +116,9 @@ def user_details(request):
 def change_user_details(request):
 	return render(request, 'register/change_user_details.html', {})
 
-def index_login(request):
-    return render(request, 'register/index.html', {})
 
 
-# def check_details(request):
-#     if
+
 
 
 

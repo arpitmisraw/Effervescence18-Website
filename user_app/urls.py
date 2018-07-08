@@ -13,8 +13,9 @@ router.register('events_update', views.EventUpdateAdminViewSet, base_name = 'eve
 urlpatterns = [
 
 	# homepage
-	path('index/', views.index, name = 'index'),
 	path('', views.homepage, name = 'homepage'),
+
+
 
 	# url for API for user details
 	path('api/regular_user/', views.RegularUserAPI.as_view(), name = 'regular_user'),
@@ -27,8 +28,5 @@ urlpatterns = [
 	path('change_user_details/', views.change_user_details, name = 'change_user_details'),
 	path('', include(router.urls)),
 	re_path(r'^event_details/(?P<pk>[0-9]+)$', views.EventView.as_view()),
-	path('index_login/', views.index_login),
-	# path('check_details/', views.check_details),
-
 	path('user_detail/', views.UserAPIView.as_view()),
 ]

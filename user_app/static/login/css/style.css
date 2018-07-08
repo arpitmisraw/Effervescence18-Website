@@ -38,7 +38,8 @@ body :-ms-input-placeholder {
   font-weight: 300;
 }
 .wrapper {
-  background: #50a3a2;
+  /*background: rgba(149, 219, 218, 1);*/
+  background-image: url(background2.jpg);
   /*background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);*/
   /*position: absolute;
   top: 50%;
@@ -59,7 +60,7 @@ body :-ms-input-placeholder {
   padding: 80px 0;
   height: 600px;
   text-align: center;
-  background-color: rgba(41, 41, 41, 0.2);
+  background-color: rgba(4, 89, 88, 0.8);
 }
 .container h1 {
   font-size: 40px;
