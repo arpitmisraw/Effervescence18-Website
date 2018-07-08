@@ -116,6 +116,9 @@ def user_details(request):
 def change_user_details(request):
 	return render(request, 'register/change_user_details.html', {})
 
+def change_password(request):
+    return render(request, 'register/change_password.html', {})
+
 
 
 
