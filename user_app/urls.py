@@ -5,7 +5,7 @@ from rest_framework.authtoken import views as rest_framework_views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('events', views.EventViewSet, base_name = 'event')
+router.register(r'api/events', views.EventViewSet, base_name = 'event')
 router.register('events_update', views.EventUpdateAdminViewSet, base_name = 'event_update')
 
 
@@ -14,6 +14,7 @@ urlpatterns = [
 
 	# homepage
 	path('', views.homepage, name = 'homepage'),
+	path('events/', views.events, name = 'event'),
 
 
 

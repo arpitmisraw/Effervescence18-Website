@@ -78,58 +78,6 @@
         </div>
       </div>
     </div>
-
-
-    <div class="container information">
-      <div class="row">
-        <div class="col-6 type">
-          Name:
-        </div>
-        <div class="col-6 info info-name">
-
-        </div>
-      </div>
-
-      <div class="row info-row">
-        <div class="col-6 type">
-          College:
-        </div>
-        <div class="col-6 info info-college">
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6 type">
-          Date of Birth:
-        </div>
-        <div class="col-6 info info-birthday">
-
-        </div>
-      </div>
-
-
-      <div class="row info-row">
-          <div class="col-6 type">
-            Gender:
-          </div>
-          <div class="col-6 info info-gender">
-
-          </div>
-      </div>
-
-
-      <div class="row">
-          <div class="col-6 type">
-            Phone:
-          </div>
-          <div class="col-6 info info-phone">
-
-          </div>
-        </div>
-      </div>
-
-
     </div>
 
 
@@ -194,49 +142,102 @@
 
   // Get json data using token
   $.ajax({
-    url : "/api/regular_user/",
+      url: "/api/regular_user/",
+      type: 'get',
+      beforeSend: function (request) {
+          if (localStorage["type"] == "fb") {
+              request.setRequestHeader("Authorization",
+                  "Bearer " + token);
+          }
+          else {
+              request.setRequestHeader("Authorization",
+                  "Token " + token);
+          }
+      },
+
+      dataType: 'json',
+      success: function (data) {
+          var name = data['name'];
+          $('.greetings').text(name);
+      },
+      error: function (MLHttpRequest, textStatus, errorThrown) {
+          if (localStorage["token"] != ' ') {
+              window.location.href = "/set_user_details/";
+          }
+          else
+              window.location.href = "/user_login/";
+      },
+  });
+
+  $.ajax({
+    url : "/api/events/",
     type : 'get',
-    beforeSend : function(request){
-      if(localStorage["type"] == "fb"){
-        request.setRequestHeader("Authorization",
-          "Bearer " + token);
-    }
-    else{
-      request.setRequestHeader("Authorization",
-          "Token " + token);
-    }
-    },
-    
+
+
     dataType : 'json',
     success: function(data){
-          var name = data['name'];
-          $('.greetings').text(name);   
-          $('.info-name').text(name);       
-        
 
-        var college = data['college'];
-        $('.info-college').text(college);
-        
+        for(var i = 0; i < data["results"].length; i++){
+            var containerClass = document.createElement("div");
+            containerClass.classList.add("container");
+            containerClass.classList.add("information");
+            var containerRow = document.createElement("div");
+            containerRow.classList.add("row");
+            containerClass.appendChild(containerRow);
+            var eventNameTag = document.createElement("div");
+            eventNameTag.classList.add("col-6");
+            eventNameTag.classList.add("type");
+            eventNameTag.innerText = "Event Name:";
+            containerRow.appendChild(eventNameTag);
+            var eventName = document.createElement("div");
+            eventName.classList.add("col-6");
+            eventName.innerText = data["results"][i]["event_name"];
+            containerRow.appendChild(eventName);
 
-        var phone = data['phone'];
-        $('.info-phone').text(phone);
-        
+            var containerRow = document.createElement("div");
+            containerRow.classList.add("row");
+            containerRow.classList.add("info-row");
+            containerClass.appendChild(containerRow);
+            var eventNameTag = document.createElement("div");
+            eventNameTag.classList.add("col-6");
+            eventNameTag.classList.add("type");
+            eventNameTag.innerText = "Prize:";
+            containerRow.appendChild(eventNameTag);
+            var eventName = document.createElement("div");
+            eventName.classList.add("col-6");
+            eventName.innerText = data["results"][i]["prize"];
+            containerRow.appendChild(eventName);
 
-        var gender = data['gender'];
-        if(gender == 'M'){
-          gender = 'Male';
+            var containerRow = document.createElement("div");
+            containerRow.classList.add("row");
+            containerClass.appendChild(containerRow);
+            var eventNameTag = document.createElement("div");
+            eventNameTag.classList.add("col-6");
+            eventNameTag.classList.add("type");
+            eventNameTag.innerText = "Event Details:";
+            containerRow.appendChild(eventNameTag);
+            var eventName = document.createElement("div");
+            eventName.classList.add("col-6");
+            eventName.innerText = data["results"][i]["description"];
+            containerRow.appendChild(eventName);
+
+            var containerRow = document.createElement("div");
+            containerRow.classList.add("row");
+            containerRow.classList.add("info-row");
+            containerClass.appendChild(containerRow);
+            var eventNameTag = document.createElement("div");
+            eventNameTag.classList.add("col-6");
+            eventNameTag.classList.add("type");
+            eventNameTag.innerText = "Points:";
+            containerRow.appendChild(eventNameTag);
+            var eventName = document.createElement("div");
+            eventName.classList.add("col-6");
+            eventName.innerText = data["results"][i]["points"];
+            containerRow.appendChild(eventName);
+
+            var eventBody = document.querySelector(".content-wrapper");
+            eventBody.appendChild(containerClass);
         }
-        else if(gender == 'F'){
-          gender = 'Female';
-        }
-        else{
-          gender = 'Other';
-        }
-        $('.info-gender').text(gender);
-        
-
-        var birthday = data['birthday'];
-        $('.info-birthday').text(birthday);
     },
     error: function(MLHttpRequest, textStatus, errorThrown){
      if(localStorage["token"] != ' '){

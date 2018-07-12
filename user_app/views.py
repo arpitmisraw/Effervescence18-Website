@@ -16,7 +16,7 @@ from rest_framework import status
 from django.conf import settings
 from rest_framework import viewsets
 from rest_framework import generics
-
+from rest_framework.pagination import PageNumberPagination
 
 
 
@@ -26,6 +26,9 @@ from rest_framework import generics
 
 def homepage(request):
 	return render(request, 'user_app/homepage.html', {})
+
+def events(request):
+    return render(request, 'user_app/events.html', {})
 
 
 
@@ -81,10 +84,15 @@ class RegularUserAPI(APIView):
     		return Response(serializer.data, status = status.HTTP_200_OK)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class EventViewPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
+    pagination_class = EventViewPagination
 
 class EventUpdateAdminViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
@@ -94,6 +102,7 @@ class EventUpdateAdminViewSet(viewsets.ModelViewSet):
 class EventView(generics.RetrieveAPIView):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
+
 
 
 # Form Views
