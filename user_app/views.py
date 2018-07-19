@@ -14,7 +14,8 @@ from .serializers import (  UserSerializer,
                             RegularUserDetailSerializer, 
                             RegularUserUpdateSerializer, 
                             EventSerializer,
-                            RegularUserPaymentSerializer
+                            RegularUserPaymentSerializer,
+                            RegularUserPaymentIdSerializer,
                         )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -114,7 +115,14 @@ class EventView(generics.RetrieveAPIView):
 class RegularUserPaymentView(generics.UpdateAPIView):
     serializer_class = RegularUserPaymentSerializer
 
-    def get_queryset(self):
+    def get_object(self):
+        user = self.request.user
+        return RegularUser.objects.get(user = user)
+
+class RegularUserPaymentIdView(generics.UpdateAPIView):
+    serializer_class = RegularUserPaymentIdSerializer
+
+    def get_object(self):
         user = self.request.user
         return RegularUser.objects.get(user = user)
 

@@ -58,6 +58,11 @@ class RegularUserPaymentSerializer(serializers.ModelSerializer):
         model = RegularUser
         fields = ['subscription_amount']
 
+class RegularUserPaymentIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegularUser
+        fields = ['payment_id']
+
 class RegularUserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegularUser

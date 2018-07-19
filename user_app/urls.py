@@ -21,6 +21,8 @@ urlpatterns = [
 	# url for API for user details
 	path('api/regular_user/', views.RegularUserAPI.as_view(), name = 'regular_user'),
 	path('api/regular_user_payment_amount/', views.RegularUserPaymentView.as_view(), name = 'regular_user_payment_amount'),
+	path('api/regular_user_payment_id/', views.RegularUserPaymentIdView.as_view(), name = 'regular_user_payment_id'),
+
 
 	# urls for forms
 	path('user_login/', views.login, name = 'user_login'),
@@ -31,5 +33,5 @@ urlpatterns = [
 	path('change_password/', views.change_password, name = 'change_password'),
 	path('', include(router.urls)),
 	re_path(r'^event_details/(?P<pk>[0-9]+)$', views.EventView.as_view()),
-	path('user_detail/', views.UserAPIView.as_view()),
+	path('user_detail/', views.UserAPIView.as_view(), name = 'user_details'),
 ]
