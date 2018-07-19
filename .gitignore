@@ -1,1 +1,3 @@
 myenv/
+.idea/
+user_app/__pycache__/

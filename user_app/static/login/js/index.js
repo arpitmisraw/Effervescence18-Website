@@ -9,14 +9,11 @@
 var gender_id = $("#gender");
 
 
+console.log("Hello");
 
 
- console.log("hello");
-console.log("Hello");
-console.log("Hello");
 var dropdown = $(".dropdown");
  gender_id.click(function(){
- 	console.log("Hello");
  	dropdown.toggleClass("dropdown-display");
  });
 
@@ -35,3 +32,4 @@ $(".female").on("click", function(){
   $("#gender").val("F");
   dropdown.toggleClass("dropdown-display");
 });
+

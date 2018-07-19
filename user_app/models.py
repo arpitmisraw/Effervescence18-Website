@@ -21,10 +21,13 @@ class RegularUser(models.Model):
 	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
 	phone = models.CharField(max_length = 10, null = True)
 	referral = models.CharField(max_length = 8, null = True)
+	subscription_amount = models.IntegerField(default = 0)
+	payment_status = models.BooleanField(default = False)
 
 
 	def __str__(self):
 		return self.name
+
 
 
 class Event(models.Model):
@@ -32,6 +35,8 @@ class Event(models.Model):
 	prize = models.IntegerField(null = True)
 	description = models.TextField()
 	points = models.IntegerField(null = True)
+	fee = models.IntegerField(null = True)
+	subscription = models.BooleanField(default = False)
 
 	def __str__(self):
 		return self.event_name

@@ -52,6 +52,12 @@ class RegularUserSerializer(serializers.ModelSerializer):
         regular_user.save()
         return regular_user
 
+
+class RegularUserPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegularUser
+        fields = ['subscription_amount']
+
 class RegularUserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegularUser
@@ -74,6 +80,11 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+
+
+
+
+
 
 
 

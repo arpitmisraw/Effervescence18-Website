@@ -5,6 +5,7 @@ Django==2.0.6
 django-allauth==0.36.0
 django-rest-auth==0.9.3
 djangorestframework==3.8.2
+django-rest-framework-social-oauth2==1.1.0
 idna==2.6
 oauthlib==2.1.0
 pkg-resources==0.0.0
