@@ -27,6 +27,12 @@ For api key and value pairs, refer this - http://django-rest-auth.readthedocs.io
 #### This end-point contains get, post and put methods for respectively accessing, creating and updating.
 
 
+### Other end-point:
+
+1. api/events/          for viewing the list of events with details
+2. api/regular_user_payment_amount/     for updating the total subscibed amount of the user(default = 0)
+
+
 ### For social authentication, the login access token has to be provided(PUSH) to the following end-point:
 
 /auth/convert-token/

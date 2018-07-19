@@ -20,6 +20,7 @@ urlpatterns = [
 
 	# url for API for user details
 	path('api/regular_user/', views.RegularUserAPI.as_view(), name = 'regular_user'),
+	path('api/regular_user_payment_amount/', views.RegularUserPaymentView.as_view(), name = 'regular_user_payment_amount'),
 
 	# urls for forms
 	path('user_login/', views.login, name = 'user_login'),
