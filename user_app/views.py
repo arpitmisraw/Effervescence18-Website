@@ -112,14 +112,14 @@ class EventView(generics.RetrieveAPIView):
     queryset = Event.objects.all()
 
 
-class RegularUserPaymentView(generics.UpdateAPIView):
+class RegularUserPaymentView(generics.RetrieveUpdateAPIView):
     serializer_class = RegularUserPaymentSerializer
 
     def get_object(self):
         user = self.request.user
         return RegularUser.objects.get(user = user)
 
-class RegularUserPaymentIdView(generics.UpdateAPIView):
+class RegularUserPaymentIdView(generics.RetrieveUpdateAPIView):
     serializer_class = RegularUserPaymentIdSerializer
 
     def get_object(self):
