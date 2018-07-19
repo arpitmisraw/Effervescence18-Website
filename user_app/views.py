@@ -8,7 +8,13 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegularUserSerializer, UserDetailSerializer, RegularUserDetailSerializer, RegularUserUpdateSerializer, EventSerializer
+from .serializers import (  UserSerializer, 
+                            RegularUserSerializer, 
+                            UserDetailSerializer, 
+                            RegularUserDetailSerializer, 
+                            RegularUserUpdateSerializer, 
+                            EventSerializer
+                        )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
