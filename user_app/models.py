@@ -6,7 +6,16 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+class Event(models.Model):
+	event_name = models.CharField(max_length = 100)
+	prize = models.IntegerField(null = True)
+	description = models.TextField()
+	points = models.IntegerField(null = True)
+	fee = models.IntegerField(null = True)
+	subscription = models.BooleanField(default = False)
 
+	def __str__(self):
+		return self.event_name
 
 class RegularUser(models.Model):
 	gender_options = (
@@ -20,10 +29,11 @@ class RegularUser(models.Model):
 	birthday = models.DateField(default = timezone.now, null = True)
 	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
 	phone = models.CharField(max_length = 10, null = True)
-	referral = models.CharField(max_length = 8, null = True)
+	referral = models.CharField(max_length = 10, null = True)
 	subscription_amount = models.IntegerField(default = 0)
 	payment_status = models.BooleanField(default = False)
-	payment_id = models.CharField(max_length = 50, null = True)
+	payment_id = models.CharField(max_length = 50, null = True, blank=True)
+	event = models.ManyToManyField(Event, blank=True)
 
 
 	def __str__(self):
@@ -31,16 +41,7 @@ class RegularUser(models.Model):
 
 
 
-class Event(models.Model):
-	event_name = models.CharField(max_length = 100)
-	prize = models.IntegerField(null = True)
-	description = models.TextField()
-	points = models.IntegerField(null = True)
-	fee = models.IntegerField(null = True)
-	subscription = models.BooleanField(default = False)
 
-	def __str__(self):
-		return self.event_name
 
 
 

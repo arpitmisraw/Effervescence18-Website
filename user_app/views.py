@@ -92,15 +92,11 @@ class RegularUserAPI(APIView):
     		return Response(serializer.data, status = status.HTTP_200_OK)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class EventViewPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
-    pagination_class = EventViewPagination
+
 
 class EventUpdateAdminViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer

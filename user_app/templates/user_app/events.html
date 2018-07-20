@@ -122,23 +122,13 @@
 
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>
+<script>
 
-
-
-  // Get token from cookie
-  // var token_re = / token=\w+/
-  // var token = token_re.exec(document.cookie);
   var token = localStorage.getItem("token");
-  if(token == null){
-    token = '';
-  }
-  // else{
-  //  token = token[0].slice(7,);
-  // }
+
   
 
-
+  var event_list = [];
 
   // Get json data using token
   $.ajax({
@@ -159,6 +149,11 @@
       success: function (data) {
           var name = data['name'];
           $('.greetings').text(name);
+          console.log(data['event']);
+          for(var i = 0; i < data['event'].length; i++){
+            event_list.push(data['event'][i]);
+          }
+          console.log(event_list);
       },
       error: function (MLHttpRequest, textStatus, errorThrown) {
           if (localStorage["token"] != ' ') {
@@ -169,6 +164,8 @@
       },
   });
 
+  console.log(event_list);
+
   $.ajax({
     url : "/api/events/",
     type : 'get',
@@ -177,10 +174,11 @@
     dataType : 'json',
     success: function(data){
 
-        for(var i = 0; i < data["results"].length; i++){
+        for(var i = 0; i < data.length; i++){
             var containerClass = document.createElement("div");
             containerClass.classList.add("container");
             containerClass.classList.add("information");
+            
             var containerRow = document.createElement("div");
             containerRow.classList.add("row");
             containerClass.appendChild(containerRow);
@@ -191,7 +189,7 @@
             containerRow.appendChild(eventNameTag);
             var eventName = document.createElement("div");
             eventName.classList.add("col-6");
-            eventName.innerText = data["results"][i]["event_name"];
+            eventName.innerText = data[i]["event_name"];
             containerRow.appendChild(eventName);
 
             var containerRow = document.createElement("div");
@@ -205,7 +203,7 @@
             containerRow.appendChild(eventNameTag);
             var eventName = document.createElement("div");
             eventName.classList.add("col-6");
-            eventName.innerText = data["results"][i]["prize"];
+            eventName.innerText = data[i]["prize"];
             containerRow.appendChild(eventName);
 
             var containerRow = document.createElement("div");
@@ -218,7 +216,7 @@
             containerRow.appendChild(eventNameTag);
             var eventName = document.createElement("div");
             eventName.classList.add("col-6");
-            eventName.innerText = data["results"][i]["description"];
+            eventName.innerText = data[i]["description"];
             containerRow.appendChild(eventName);
 
             var containerRow = document.createElement("div");
@@ -232,11 +230,55 @@
             containerRow.appendChild(eventNameTag);
             var eventName = document.createElement("div");
             eventName.classList.add("col-6");
-            eventName.innerText = data["results"][i]["points"];
+            eventName.innerText = data[i]["points"];
             containerRow.appendChild(eventName);
+
+            var containerRow = document.createElement("div");
+            containerRow.classList.add("row");
+            containerClass.appendChild(containerRow);
+            var eventNameTag = document.createElement("div");
+            eventNameTag.classList.add("col-6");
+            eventNameTag.classList.add("type");
+            eventNameTag.innerText = "Subscription Fee:";
+            containerRow.appendChild(eventNameTag);
+            var eventName = document.createElement("div");
+            eventName.classList.add("col-6");
+            eventName.classList.add("fee");
+            eventName.innerText = data[i]["points"];
+            containerRow.appendChild(eventName);
+
+            var containerRow = document.createElement("div");
+            containerRow.classList.add("row");
+            containerClass.appendChild(containerRow);
+            var eventNameTag = document.createElement("div");
+            eventNameTag.classList.add("col-12");
+            eventNameTag.classList.add("type");
+            
+            
+            if($.inArray(data[i]['id'], event_list) == -1){
+              eventNameTag.innerText = "Subscribe?";
+              eventNameTag.style.color = 'red';
+              eventNameTag.classList.add("not-subscribed");
+            }
+            else{
+              eventNameTag.innerText = "Subscribed";
+              eventNameTag.style.color = 'green';
+              eventNameTag.classList.add("subscribed");
+            }
+
+            containerRow.appendChild(eventNameTag);
+            // var eventName = document.createElement("div");
+            // eventName.classList.add("col-6");
+            // eventName.classList.add("fee");
+            // eventName.innerText = data[i]["points"];
+            // containerRow.appendChild(eventName);
 
             var eventBody = document.querySelector(".content-wrapper");
             eventBody.appendChild(containerClass);
+
+            
+
+            //console.log(event_list);
         }
     },
     error: function(MLHttpRequest, textStatus, errorThrown){

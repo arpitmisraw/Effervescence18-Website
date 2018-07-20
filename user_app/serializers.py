@@ -81,7 +81,7 @@ class RegularUserDetailSerializer(serializers.ModelSerializer):
         exclude = '__all__'
 
 
-class EventSerializer(serializers.HyperlinkedModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
