@@ -34,8 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-
-
 class RegularUserSerializer(serializers.ModelSerializer): 
     class Meta:
         model = RegularUser
@@ -62,6 +60,10 @@ class RegularUserPaymentIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegularUser
         fields = ['payment_id']
+
+class RegularUserEventSerializer(serializers.Serializer):
+    event_id = serializers.IntegerField()
+    add_or_remove = serializers.CharField(max_length = 20)
 
 class RegularUserUpdateSerializer(serializers.ModelSerializer):
     class Meta:

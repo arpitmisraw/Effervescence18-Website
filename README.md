@@ -31,7 +31,8 @@ For api key and value pairs, refer this - http://django-rest-auth.readthedocs.io
 
 1. api/events/          for viewing the list of events with details
 2. api/regular_user_payment_amount/     for updating the total subscibed amount of the user(default = 0)
-
+3. api/regular_user_payment_id/     for the user to input his/her payment id
+4. api/regular_user_event/  to add a particular event under the user's subscription
 
 ### For social authentication, the login access token has to be provided(PUSH) to the following end-point:
 

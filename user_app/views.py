@@ -16,6 +16,7 @@ from .serializers import (  UserSerializer,
                             EventSerializer,
                             RegularUserPaymentSerializer,
                             RegularUserPaymentIdSerializer,
+                            RegularUserEventSerializer
                         )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -121,6 +122,42 @@ class RegularUserPaymentIdView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         user = self.request.user
         return RegularUser.objects.get(user = user)
+
+class RegularUserEventView(APIView):
+    serializer_class = RegularUserEventSerializer
+
+    def get(self, request, format = 'json'):
+        regular_user = RegularUser.objects.get(user = request.user)
+        event_list = regular_user.event.all()
+        regular_user.subsciption_amount = sum([i.points for i in event_list])
+        json = {
+            'subscription_amount' : regular_user.subsciption_amount
+        }
+        return Response(json, status = status.HTTP_200_OK)
+
+    def put(self, request, format = 'json'):
+        regular_user = RegularUser.objects.get(user = request.user)
+        event = Event.objects.get(id = request.data['event_id'])
+        check = True if request.data['add_or_remove'] == 'add' else False
+        if check:
+            regular_user.event.add(event)
+            event_list = regular_user.event.all()
+            regular_user.subsciption_amount = sum([i.points for i in event_list])
+            json = {
+                'status' : 'Event Added',
+                'subscription_amount' : regular_user.subsciption_amount
+            }
+            return Response(json, status = status.HTTP_200_OK)
+        else:
+            regular_user.event.remove(event)
+            event_list = regular_user.event.all()
+            regular_user.subsciption_amount = sum([i.points for i in event_list])
+            json = {
+                'status' : 'Event Removed',
+                'subscription_amount' : regular_user.subsciption_amount
+            }
+            return Response(json, status = status.HTTP_200_OK)
+
 
 
 

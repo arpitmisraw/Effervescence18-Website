@@ -22,6 +22,7 @@ urlpatterns = [
 	path('api/regular_user/', views.RegularUserAPI.as_view(), name = 'regular_user'),
 	path('api/regular_user_payment_amount/', views.RegularUserPaymentView.as_view(), name = 'regular_user_payment_amount'),
 	path('api/regular_user_payment_id/', views.RegularUserPaymentIdView.as_view(), name = 'regular_user_payment_id'),
+	path('api/regular_user_event/', views.RegularUserEventView.as_view(), name = 'regular_user_event'),
 
 
 	# urls for forms
