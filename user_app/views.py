@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .serializers import (  UserSerializer, 
                             RegularUserSerializer, 
                             UserDetailSerializer, 
@@ -16,7 +17,8 @@ from .serializers import (  UserSerializer,
                             EventSerializer,
                             RegularUserPaymentSerializer,
                             RegularUserPaymentIdSerializer,
-                            RegularUserEventSerializer
+                            RegularUserEventSerializer,
+                            FileSerializer,
                         )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -158,7 +160,25 @@ class RegularUserEventView(APIView):
             }
             return Response(json, status = status.HTTP_200_OK)
 
+class FileView(APIView):
+    parser_classes = (MultiPartParser, FormParser,)
 
+    def post(self, request, *args, **kwargs):
+        file_serializer = FileSerializer(data = request.data)
+        if file_serializer.is_valid():
+            file = file_serializer.save(user = request.user)
+            file.save()
+            return Response(file_serializer.data, status = status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+class FileGenericView(generics.RetrieveAPIView):
+    serializer_class = FileSerializer
+    parser_classes = (MultiPartParser, FormParser, JSONParser,)
+
+    def get_object(self):
+        return self.request.user
+        
 
 
 # Form Views

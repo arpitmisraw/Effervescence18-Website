@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
-from .models import RegularUser, Event
+from .models import RegularUser, Event, File
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -87,6 +87,12 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ['file']
 
 
 

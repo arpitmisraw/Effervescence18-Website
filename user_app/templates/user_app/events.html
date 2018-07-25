@@ -134,6 +134,7 @@
   $.ajax({
       url: "/api/regular_user/",
       type: 'get',
+      async : false,
       beforeSend: function (request) {
           if (localStorage["type"] == "fb") {
               request.setRequestHeader("Authorization",
@@ -169,7 +170,7 @@
   $.ajax({
     url : "/api/events/",
     type : 'get',
-
+    
 
     dataType : 'json',
     success: function(data){

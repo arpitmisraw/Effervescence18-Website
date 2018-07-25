@@ -23,7 +23,8 @@ urlpatterns = [
 	path('api/regular_user_payment_amount/', views.RegularUserPaymentView.as_view(), name = 'regular_user_payment_amount'),
 	path('api/regular_user_payment_id/', views.RegularUserPaymentIdView.as_view(), name = 'regular_user_payment_id'),
 	path('api/regular_user_event/', views.RegularUserEventView.as_view(), name = 'regular_user_event'),
-
+	path('api/file_upload/', views.FileView.as_view(), name = 'file_upload'),
+	path('api/file_view/', views.FileGenericView.as_view(), name = 'file_view'),
 
 	# urls for forms
 	path('user_login/', views.login, name = 'user_login'),
