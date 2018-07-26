@@ -205,6 +205,12 @@ def change_password(request):
     return render(request, 'register/change_password.html', {})
 
 
+def example_login(request):
+    return render(request, 'register/login-page.html', {})
+
+
+
+
 
 
 
