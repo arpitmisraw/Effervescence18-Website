@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import RegularUser, Event, File
+from .models import RegularUser, Event, File, VerifiedUser
 from .forms import UserForm, LoginForm, CredentialForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -19,6 +19,7 @@ from .serializers import (  UserSerializer,
                             RegularUserPaymentIdSerializer,
                             RegularUserEventSerializer,
                             FileSerializer,
+                            UserVerificationSerializer,
                         )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -94,6 +95,28 @@ class RegularUserAPI(APIView):
     		serializer.save()
     		return Response(serializer.data, status = status.HTTP_200_OK)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserVerificationView(APIView):
+    serializer_class = UserVerificationSerializer
+
+    def post(self, request, format='json'):
+        new_verified_user = VerifiedUser(user = self.request.user)
+        new_verified_user.save()
+        json = {
+            'status' : 'verified'
+        }
+        return Response(json, status = status.HTTP_200_OK)
+    def get(self, request, format = 'json'):
+        verified_user = VerifiedUser.objects.filter(user = self.request.user).count()
+        if verified_user:
+            json = {
+                'status' : 'verified'
+            }
+        else:
+            json = {
+                'status' : 'not verified'
+            }
+        return Response(json, status = status.HTTP_200_OK)
 
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):

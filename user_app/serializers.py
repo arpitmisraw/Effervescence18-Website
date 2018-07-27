@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
-from .models import RegularUser, Event, File
+from .models import RegularUser, Event, File, VerifiedUser
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -94,7 +94,10 @@ class FileSerializer(serializers.ModelSerializer):
         model = File
         fields = ['file']
 
-
+class UserVerificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VerifiedUser
+        fields = ['user']
     
 
 

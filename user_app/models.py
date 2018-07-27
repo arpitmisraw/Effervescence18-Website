@@ -40,6 +40,13 @@ class RegularUser(models.Model):
 	def __str__(self):
 		return self.name
 
+class VerifiedUser(models.Model):
+	user = models.OneToOneField(User, on_delete = models.CASCADE, null = True)
+	verified = models.BooleanField(default = False)
+
+	def __str__(self):
+		return self.user.username
+
 class File(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	file = models.FileField(blank = True, null = True)
