@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import RegularUser, Event
+from .models import RegularUser, Event, File
 from .forms import UserForm, LoginForm, CredentialForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -172,12 +172,45 @@ class FileView(APIView):
         else:
             return Response(file_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class FileGenericView(generics.RetrieveAPIView):
+class FileGenericView(generics.ListAPIView):
     serializer_class = FileSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser,)
+    # queryset = File.objects.all()
+    def get_queryset(self):
+        return RegularUser.objects.filter(user = self.request.user)
 
-    def get_object(self):
-        return self.request.user
+class LeaderBoardView(APIView):
+
+    def get(self, request, format = 'json'):
+        regular_user = RegularUser.objects.all().order_by('-total_points')
+        json = []
+        for i in regular_user:
+            json += [
+                {
+                    'id' : i.pk,
+                    'name' : i.name,
+                    'points' : i.total_points
+                }
+            ]
+
+        return Response(json, status = status.HTTP_200_OK)
+
+class PeersView(APIView):
+
+    def get(self, request, format = 'json'):
+        regular_user = RegularUser.objects.get(user = self.request.user)
+        peers = RegularUser.objects.filter(college = regular_user.college).exclude(user = self.request.user)
+        json = []
+        for i in peers:
+            json += {
+                'id' : i.pk,
+                'name' : i.name,
+                'points': i.total_points
+            }
+        return Response(json, status = status.HTTP_200_OK)
+
+        
+
         
 
 

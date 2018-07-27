@@ -25,6 +25,7 @@ urlpatterns = [
 	path('api/regular_user_event/', views.RegularUserEventView.as_view(), name = 'regular_user_event'),
 	path('api/file_upload/', views.FileView.as_view(), name = 'file_upload'),
 	path('api/file_view/', views.FileGenericView.as_view(), name = 'file_view'),
+	path('api/leaderboard/', views.LeaderBoardView.as_view(), name = 'leaderboard'),
 
 	# urls for forms
 	path('user_login/', views.login, name = 'user_login'),

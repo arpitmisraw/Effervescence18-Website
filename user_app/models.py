@@ -34,6 +34,7 @@ class RegularUser(models.Model):
 	payment_status = models.BooleanField(default = False)
 	payment_id = models.CharField(max_length = 50, null = True, blank=True)
 	event = models.ManyToManyField(Event, blank=True)
+	total_points = models.IntegerField(blank = True, null = True, default = 0)
 
 
 	def __str__(self):
