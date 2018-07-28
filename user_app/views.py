@@ -29,6 +29,7 @@ from django.conf import settings
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
+from allauth.account.models import EmailAddress
 
 
 
@@ -221,14 +222,13 @@ class LeaderBoardView(APIView):
 class PeersView(APIView):
 
     def get(self, request, format = 'json'):
-        regular_user = RegularUser.objects.get(user = self.request.user)
-        peers = RegularUser.objects.filter(college = regular_user.college).exclude(user = self.request.user)
-        json = []
-        for i in peers:
-            json += {
-                'id' : i.pk,
-                'name' : i.name,
-                'points': i.total_points
+        if EmailAddress.objects.filter(user = self.request.user, verified = True).exists():
+            json = {
+                'status' : 'verified',
+            }
+        else:
+            json = {
+                'status' : 'not verified',
             }
         return Response(json, status = status.HTTP_200_OK)
 

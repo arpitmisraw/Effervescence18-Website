@@ -21,6 +21,7 @@ from rest_auth.views import (
     LoginView, LogoutView, UserDetailsView, PasswordChangeView,
     PasswordResetView, PasswordResetConfirmView
 )
+from allauth.account.views import ConfirmEmailView
 
 urlpatterns = [
     re_path(r'^', include('django.contrib.auth.urls')),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('api/', include('rest_auth.urls')),
     path('api/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
+    re_path(r'^api/registration/account-confirm-email/(?P<key>\w+)/$', ConfirmEmailView),
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework_social_oauth2.urls')),
 ]
