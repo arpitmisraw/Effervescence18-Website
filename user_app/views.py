@@ -43,6 +43,9 @@ def homepage(request):
 def events(request):
     return render(request, 'user_app/events.html', {})
 
+def index(request):
+    return render(request, 'user_app/index.html', {})
+
 
 
 # API VIEWS

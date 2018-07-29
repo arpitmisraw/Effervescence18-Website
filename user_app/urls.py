@@ -15,6 +15,7 @@ urlpatterns = [
 	# homepage
 	path('', views.homepage, name = 'homepage'),
 	path('events/', views.events, name = 'event'),
+	path('index/', views.index, name = 'index'),
 
 
 
