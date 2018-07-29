@@ -38,6 +38,9 @@ from allauth.account.models import EmailAddress
 # Homepage View
 
 def homepage(request):
+	return render(request, 'user_app/ca.html', {})
+
+def accountpage(request):
 	return render(request, 'user_app/homepage.html', {})
 
 def events(request):

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Campus Ambassador </title>
+  {% load static %}
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'user_app/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'user_app/castyle.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+</head>
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo"><img style="height:60px;width:60px;" src="{% static 'images/ca/effe.png' %}"/><a class="navbar-brand" style="padding-left:6%;color:teal;font-family:'Berkshire Swash';font-size:25px;transition: all 100ms ease-in-out;" href="#">Effervescence'18</a></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#roles">Roles</a></li>
+    <li><a href="#incentives">Incentives</a></li>
+    <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+		<li><a href="#roles">Roles</a></li>
+        <li><a href="#incentives">Incentives</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">Campus Ambassador</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Register Now to be part of north's greatest fest!</h5>
+        </div>
+        <div class="row center">
+          <a href="/set_new_user/" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Register</a>&nbsp&nbsp&nbsp&nbsp
+          <a href="/user_login/" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Login</a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="{% static 'images/ca/ca.jpeg' %}" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+		<div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>About CA Program</h4>
+          <p class="left-align light">The CR system of Effervescence,IIIT Allahabad plays an integral part in its growth and promotions. It serves as a platform for binding Effervescence with the students across the country as well as imbibing their culture in our festival.
+
+It provides an opportunity to college students across the nation to stand out from multitude of people by being our voice in their respective colleges and thereby significantly bridging the gap between the two.
+
+So do register ,by associating with us as College Ambassadors and thereby moulding this edition of Effervescence bigger and glorious than ever before.</p>
+        </div>
+      </div>
+      <!--   Icon Section   -->
+      <div class="row" id="roles">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Participation</h5>
+
+            <p class="light">It is only the Campus Ambassadors who are responsible to refer other CA to the team Effervescence.Encourage and motivate the people around to register and to show active participation in the EFFE events.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">camera_alt</i></h2>
+            <h5 class="center">Social Media</h5>
+
+            <p class="light">Promoting Effervescence,IIIT Allahabad on various other social platforms like Twitter,Instagram and even various Facebook and Whatsapp groups.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">location_city</i></h2>
+            <h5 class="center">Multicity</h5>
+
+            <p class="light">The CAs are expected to coordinate with the EFFE team and help us conduct the multicity program in your city(if selected) along with managing public relations with Effervescence.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container" id="incentives">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 m12 l12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Incentives</h4>
+        </div>
+      </div>
+		
+			
+		<div class="row">
+          <div class="col s12 m6 l3">
+            <h6 class="light">Cerificates</h6>
+            
+              <div class="card-image pic" >
+                <img src="{% static 'images/ca/37811295_2096965080374205_4625127831544791040_n.jpeg' %}" class="pic">
+                
+				</div>
+            
+			</div>
+             
+             
+            
+				
+          <div class="col s12 m6 l3">
+            <h6 class="light">Pronite passes</h6>
+           
+              <div class="card-image pic">
+                <img src="{% static 'images/ca/tickets.jpg' %}" class="pic">
+                
+				</div>
+            
+			</div>
+             
+             
+            
+				
+          <div class="col s12 m6 l3">
+            <h6 class="light">Internship Opportunity</h6>
+            
+              <div class="card-image pic">
+                <img src="{% static 'images/ca/37831874_2096961243707922_2127322938368589824_n.jpeg' %}" src="{% static 'images/ca/37874931_2096968410373872_4147344730256048128_n.jpeg' %}" src="{% static 'images/ca/37831874_2096961243707922_2127322938368589824_n.jpeg' %}" class="pic">
+                
+				</div>
+            
+			</div>
+             
+             
+            
+				
+          <div class="col s12 m6 l3">
+            <h6 class="light">Zebronics Goodies</h6>
+            
+              <div class="card-image pic">
+                <img src="{% static 'images/ca/goodies.jpeg' %}" class="pic">
+                
+				</div>
+            
+			</div>
+             
+             
+          
+		
+					</div>
+					</div>
+					
+             
+            </div>
+	
+
+
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Effervescence</h5>
+          <p class="grey-text text-lighten-4">Effervescence is the annual cultural fest of IIIT Allahabad and one of the greatest fests of the north.</p>
+
+
+        </div>
+        
+        <div class=" col l6 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul >
+			  
+            <li style="display: inline;padding: 25px;"><a class="white-text" href="https://www.facebook.com/effervescence.iiita/"><i class="fab fa-facebook-f fa-3x"></i></a></li>
+            <li style="display: inline;padding: 25px;"><a class="white-text" href="https://twitter.com/goeffervescence?lang=en"><i class="fab fa-twitter fa-3x"></i></a></li>
+            <li style="display: inline;padding: 25px;"><a class="white-text" href="https://instagram.com/goeffervescence"><i class="fab fa-instagram fa-3x"></i></a></li>
+            
+				
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        effervescence@iiita.ac.in
+        </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'user_app/materialize.js' %}"></script>
+  <script src="{% static 'user_app/init.js' %}"></script>
+
+  </body>
+</html>
