@@ -39,6 +39,4 @@ urlpatterns = [
 	re_path(r'^event_details/(?P<pk>[0-9]+)$', views.EventView.as_view()),
 	path('user_detail/', views.UserAPIView.as_view(), name = 'user_details'),
 
-
-	path('example_login/', views.example_login),
 ]
