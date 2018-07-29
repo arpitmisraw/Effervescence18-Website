@@ -58,7 +58,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-					<div class="card card-signup">
+					<div class="card card-signup" style="position: relative; top:-50px">
 							<h2 style="text-align:center; color:rgba(100, 100, 100, 0.8)">Change User Details</h2>
 							<form class="form" method="" action="login-page.html">
 
@@ -208,7 +208,7 @@
 					$('#gender').val(gender);
 					var birthday = data['birthday'];
 					$("#birthday").datepicker("option", "dateFormat", "yy-mm-dd" ).val(birthday);
-					{% comment %} $('#birthday').val(birthday);  {% endcomment %}
+
 					var fb_id = data['fb_id'];
 					$('#fb-id').val(fb_id);
         },
