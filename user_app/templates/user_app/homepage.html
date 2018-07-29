@@ -1,271 +1,242 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 
+<html lang="en">
 <head>
-  {% load static %}
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Dashboard-Effervescence</title>
-  <!-- Bootstrap core CSS-->
-  <link href="{% static 'dashboard/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="{% static 'dashboard/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="{% static 'dashboard/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="{% static 'dashboard/css/sb-admin.css' %}" rel="stylesheet">
+
+	<meta charset="utf-8" />
+	<!-- <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" href="../assets/img/favicon.png"> -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Login Page - Material Kit PRO by Creative Tim</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+	<!-- Canonical SEO -->
+	<link rel="canonical" href="http://www.creative-tim.com/product/material-kit-pro" />
+
+	<!--     Fonts and icons     -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+	{% load static %}
+
+    <link href="{% static 'material/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'material/css/material.css' %}" rel="stylesheet"/>
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Effervescence</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item dashboard" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="{% url 'homepage' %}">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
-          </a>
-        </li>
-          <li class="nav-item events" data-toggle="tooltip" data-placement="right" title="Events">
-          <a class="nav-link" href="{% url 'event' %}">
-            <i class="fa fa-calendar"></i>
-            <span class="nav-link-text">Events</span>
-          </a>
-        </li>
-        
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">   
-      	<li class="nav-item">
-          <a class="nav-link" href="{% url 'change_password' %}">
-            <i class="fa fa-unlock-alt" aria-hidden="true"></i>Change Password</a>
-        </li>  
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'change_user_details' %}">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
-        </li>   
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<body class="login-page">
+	<nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+    	<div class="container">
+        	<!-- Brand and toggle get grouped for better mobile display -->
+        	<div class="navbar-header">
+        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+            		<span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+        		</button>
+        		<a class="navbar-brand" href="#">Effervescence</a>
+        	</div>
+
+        	<div class="collpase navbar-collapse">
+        		<ul class="nav navbar-nav navbar-right">
+    				<li>
+    					<a href="{% url 'change_user_details' %}">
+    						<i class="material-icons">edit</i> Edit Details
+						</a>
+					
+					</li>
+					<li>
+						<a href="{% url 'change_password' %}">
+							<i class="material-icons">lock_open</i> Change Password
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'user_logout' %}">
+							<i class="material-icons">close</i> Logout
+						</a>
+					</li>
+
+        		</ul>
+        	</div>
+    	</div>
+    </nav>
+
+	<div class="page-header header-filter" style="background-image: url('../assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+					<div class="card card-signup">
+						<h2 style="text-align:center; color:rgba(100, 100, 100, 0.8)">Details</h2>
+						<div class="form" method="" action="login-page.html">
+
+								<div class="card-content" style="margin-bottom:20px">
+	
+									<div class="input-group" style="margin-bottom:40px; margin-top: 20px">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+										<div type="text" class="form-control" id="info-name" style="text-align:center"></div>
+									</div>
+
+									<div class="input-group" style="margin-bottom:40px">
+										<span class="input-group-addon">
+											<i class="material-icons">school</i>
+										</span>
+										<div type="text" class="form-control" id="info-college" style="text-align:center"></div>
+									</div>
+
+									<div class="input-group" style="margin-bottom:40px">
+										<span class="input-group-addon">
+											<i class="material-icons">calendar_today</i>
+										</span>
+										<div type="text" class="form-control" id="info-birthday" style="text-align:center"></div>
+									</div>
+
+									<div class="input-group" style="margin-bottom:40px">
+										<span class="input-group-addon">
+											<i class="material-icons">person</i>
+										</span>
+										<div type="text" class="form-control" id="info-gender" style="text-align:center"></div>
+									</div>
+
+									<div class="input-group" style="margin-bottom:40px"> 
+										<span class="input-group-addon">
+											<i class="material-icons">phone</i>
+										</span>
+										<div type="text" class="form-control" id="info-phone" style="text-align:center"></div>
+									</div>
+	
+								</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<footer class="footer" style="position:absolute; bottom:0%; width: 100vw;">
+	        <div class="container">
+
+	            <div class="copyright col-md-12" style="text-align:center">
+	                &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="#" target="_blank">Effervescence</a>
+	            </div>
+	        </div>
+	    </footer>
+
+	</div>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	
+	<script>
 
 
 
+			// Get token from cookie
+			// var token_re = / token=\w+/
+			// var token = token_re.exec(document.cookie);
+			var token = localStorage.getItem("token");
+			if(token == null){
+			  token = '';
+			}
+			// else{
+			//  token = token[0].slice(7,);
+			// }
+			
+		  
+		  
+		  
+			// Get json data using token
+			$.ajax({
+			  url : "/api/regular_user/",
+			  type : 'get',
+			  beforeSend : function(request){
+				if(localStorage["type"] == "fb"){
+				  request.setRequestHeader("Authorization",
+					"Bearer " + token);
+			  }
+			  else{
+				request.setRequestHeader("Authorization",
+					"Token " + token);
+			  }
+			  },
+			  
+			  dataType : 'json',
+			  success: function(data){
+					var name = data['name'];
+					$('.greetings').text(name);   
+					$('#info-name').text(name);       
+				  
+		  
+				  var college = data['college'];
+				  $('#info-college').text(college);
+				  
+		  
+				  var phone = data['phone'];
+				  $('#info-phone').text(phone);
+				  
+		  
+				  var gender = data['gender'];
+				  if(gender == 'M'){
+					gender = 'Male';
+				  }
+				  else if(gender == 'F'){
+					gender = 'Female';
+				  }
+				  else{
+					gender = 'Other';
+				  }
+				  $('#info-gender').text(gender);
+				  
+		  
+				  var birthday = data['birthday'];
+				  $('#info-birthday').text(birthday);
+			  },
+			  error: function(MLHttpRequest, textStatus, errorThrown){
+			   if(localStorage["token"] != ' '){
+				window.location.href = "/set_user_details/";
+			   }
+			   else
+				window.location.href = "/user_login/";
+			  },
+			});
+		  
+		  
+		  
+		  
+		  </script>
 
-  <div class="content-wrapper">
-    <div class="container-fluid welcome">
-
-      <div class="row">
-        <div class="col-12">
-          <h1>Hello <span class="greetings"></span></h1>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="container information">
-      <div class="row">
-        <div class="col-6 type">
-          Name:
-        </div>
-        <div class="col-6 info info-name">
-
-        </div>
-      </div>
-
-      <div class="row info-row">
-        <div class="col-6 type">
-          College:
-        </div>
-        <div class="col-6 info info-college">
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6 type">
-          Date of Birth:
-        </div>
-        <div class="col-6 info info-birthday">
-
-        </div>
-      </div>
-
-
-      <div class="row info-row">
-          <div class="col-6 type">
-            Gender:
-          </div>
-          <div class="col-6 info info-gender">
-
-          </div>
-      </div>
-
-
-      <div class="row">
-          <div class="col-6 type">
-            Phone:
-          </div>
-          <div class="col-6 info info-phone">
-
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-
-
-
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-
-
-
-
-
-
-    <footer class="sticky-footer copyright">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Effervescence 2018</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="{% url 'user_logout' %}">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>
-
-
-
-  // Get token from cookie
-  // var token_re = / token=\w+/
-  // var token = token_re.exec(document.cookie);
-  var token = localStorage.getItem("token");
-  if(token == null){
-    token = '';
-  }
-  // else{
-  //  token = token[0].slice(7,);
-  // }
-  
-
-
-
-  // Get json data using token
-  $.ajax({
-    url : "/api/regular_user/",
-    type : 'get',
-    beforeSend : function(request){
-      if(localStorage["type"] == "fb"){
-        request.setRequestHeader("Authorization",
-          "Bearer " + token);
-    }
-    else{
-      request.setRequestHeader("Authorization",
-          "Token " + token);
-    }
-    },
-    
-    dataType : 'json',
-    success: function(data){
-          var name = data['name'];
-          $('.greetings').text(name);   
-          $('.info-name').text(name);       
-        
-
-        var college = data['college'];
-        $('.info-college').text(college);
-        
-
-        var phone = data['phone'];
-        $('.info-phone').text(phone);
-        
-
-        var gender = data['gender'];
-        if(gender == 'M'){
-          gender = 'Male';
-        }
-        else if(gender == 'F'){
-          gender = 'Female';
-        }
-        else{
-          gender = 'Other';
-        }
-        $('.info-gender').text(gender);
-        
-
-        var birthday = data['birthday'];
-        $('.info-birthday').text(birthday);
-    },
-    error: function(MLHttpRequest, textStatus, errorThrown){
-     if(localStorage["token"] != ' '){
-      window.location.href = "/set_user_details/";
-     }
-     else
-      window.location.href = "/user_login/";
-    },
-  });
-
-
-
-
-</script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'dashboard/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'dashboard/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="{% static 'dashboard/vendor/chart.js/Chart.min.js' %}"></script>
-    <script src="{% static 'dashboard/vendor/datatables/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'dashboard/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{% static 'dashboard/js/sb-admin.min.js' %}"></script>
-    <!-- Custom scripts for this page-->
-    <script src="{% static 'dashboard/js/sb-admin-datatables.min.js' %}"></script>
-    <script src="{% static 'dashboard/js/sb-admin-charts.min.js' %}"></script>
-  </div>
 </body>
+	<!--   Core JS Files   -->
+	{% load static %}
 
+	
+	<script src="{% static 'material/js/bootstrap.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'material/js/material.min.js' %}"></script>
+	<!--    Plugin for Date Time Picker and Full Calendar Plugin   -->
+	<script src="{% static 'material/js/moment.min.js' %}"></script>
+
+	<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/   -->
+	<script src="{% static 'material/js/nouislider.min.js' %}" type="text/javascript"></script>
+
+	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker   -->
+	<script src="{% static 'material/js/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
+
+	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select   -->
+	<script src="{% static 'material/js/bootstrap-selectpicker.js' %}" type="text/javascript"></script>
+
+	<!--	Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/   -->
+	<script src="{% static 'material/js/bootstrap-tagsinput.js' %}"></script>
+
+	<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
+	<script src="{% static 'material/js/jasny-bootstrap.min.js' %}"></script>
+
+	<!--    Plugin For Google Maps   -->
+	<script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFPQibxeDaLIUHsC6_KqDdFaUdhrbhZ3M"></script>
+
+	<!--    Plugin for 3D images animation effect, full documentation here: https://github.com/drewwilson/atvImg    -->
+	<script src="{% static 'material/js/atv-img-animation.js' %}" type="text/javascript"></script>
+
+	<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
+	<script src="{% static 'material/js/material-kit.min.js' %}" type="text/javascript"></script>
 </html>

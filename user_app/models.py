@@ -29,6 +29,7 @@ class RegularUser(models.Model):
 	birthday = models.DateField(default = timezone.now, null = True)
 	gender = models.CharField(max_length = 1, choices = gender_options, null = True)
 	phone = models.CharField(max_length = 10, null = True)
+	fb_id = models.CharField(max_length = 100, blank = True, null = True)
 	referral = models.CharField(max_length = 10, null = True)
 	subscription_amount = models.IntegerField(default = 0)
 	payment_status = models.BooleanField(default = False)

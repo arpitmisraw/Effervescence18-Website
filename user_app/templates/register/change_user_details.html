@@ -23,7 +23,8 @@
 
     <link href="{% static 'material/css/bootstrap.min.css' %}" rel="stylesheet" />
 	<link href="{% static 'material/css/material.css' %}" rel="stylesheet"/>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+	<link href="{% static 'jquery-ui/jquery-ui.css' %}" rel="stylesheet">
+	
 </head>
 
 <body class="login-page">
@@ -41,15 +42,15 @@
 					</div>
 		
 					<div class="collpase navbar-collapse">
-						<ul class="nav navbar-nav navbar-right">
-							<li>
-								<a href="{% url 'new_user' %}">
-									<i class="material-icons">apps</i> Register
-								</a>
-							</li>
-		
-						</ul>
-					</div>
+							<ul class="nav navbar-nav navbar-right">
+								<li>
+									<a href="{% url 'homepage' %}">
+										<i class="material-icons">apps</i> Homepage
+									</a>
+								</li>
+			
+							</ul>
+						</div>
 				</div>
 			</nav>
 
@@ -60,20 +61,7 @@
 					<div class="card card-signup">
 							<h2 style="text-align:center; color:rgba(100, 100, 100, 0.8)">Change User Details</h2>
 							<form class="form" method="" action="login-page.html">
-								<!-- <div class="header header-primary text-center">
-									<h4 class="card-title">Log in</h4>
-									<div class="social-line">
-										<a href="login-page.html#pablo" class="btn btn-just-icon btn-simple">
-											<i class="fa fa-facebook-square"></i>
-										</a>
-										<a href="login-page.html#pablo" class="btn btn-just-icon btn-simple">
-											<i class="fa fa-twitter"></i>
-										</a>
-										<a href="login-page.html#pablo" class="btn btn-just-icon btn-simple">
-											<i class="fa fa-google-plus"></i>
-										</a>
-									</div>
-								</div> -->
+
 								<div class="card-content">
 	
 									<div class="input-group">
@@ -85,7 +73,7 @@
 	
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="material-icons">email</i>
+											<i class="material-icons">face</i>
 										</span>
 										<input type="text" class="form-control" placeholder="Name..." id="name">
 									</div>
@@ -110,7 +98,13 @@
 										<span class="input-group-addon">
 											<i class="material-icons">person</i>
 										</span>
-										<input type="text" placeholder="Gender..." class="form-control" id="gender"/>
+										<div class="col-xs-12">
+										<select class="selectpicker" data-style="form-control" data-size="7" id="gender">
+											<option id= "M" value="M">Male </option>
+											<option id = 'F' value="F">Female</option>
+											<option id = 'O' value="O">Other</option>
+										</select>
+										</div>
 									</div>
 									
 									<div class="input-group" data-provide = 'datepicker'>
@@ -119,6 +113,13 @@
 										</span>
 										<input type="text" placeholder="Birthday..." class="form-control" id="birthday"/>
 									</div>
+
+									<div class="input-group">
+											<span class="input-group-addon">
+												<i class="material-icons">perm_identity</i>
+											</span>
+											<input type="text" placeholder="Facebook id link..." class="form-control" id="fb-id"/>
+										</div>
 	
 								</div>
 								<div class="footer text-center">
@@ -142,6 +143,17 @@
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+	<script>
+		
+		$( function() {
+			$( "#birthday" ).datepicker({
+				defaultDate: -7514,
+				changeYear: true,
+				changeMonth: true
+			});
+		} );
+		$.datepicker.formatDate('yy-mm-dd');
+		</script>
 	
   <script>
 
@@ -192,10 +204,13 @@
           $("#college").val(college);
           var phone = data['phone'];
           $('#phone').val(phone);
-          var gender = data['gender'];
-          $('#gender').val(gender);
-          var birthday = data['birthday'];
-          $('#birthday').val(birthday);
+					var gender = data['gender'];
+					$('#gender').val(gender);
+					var birthday = data['birthday'];
+					$("#birthday").datepicker("option", "dateFormat", "yy-mm-dd" ).val(birthday);
+					{% comment %} $('#birthday').val(birthday);  {% endcomment %}
+					var fb_id = data['fb_id'];
+					$('#fb-id').val(fb_id);
         },
         error: function(MLHttpRequest, textStatus, errorThrown){
           alert("Please log in again!");
@@ -210,7 +225,9 @@
         var college = $("#college").val();
         var phone = $('#phone').val();
         var gender = $('#gender').val();
-        var birthday = $('#birthday').val();
+				var birthday = $("#birthday").datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+				var fb_id = $('#fb-id').val();
+				console.log(birthday);
     
         $.ajax({
           url : "/api/regular_user/",
@@ -224,7 +241,8 @@
             "college": college, 
             "phone" : phone,
             "gender" : gender,
-            "birthday" : birthday
+						"birthday" : birthday,
+						"fb_id" : fb_id,
           },
           dataType : 'json',
           success: function(data){
@@ -275,6 +293,35 @@
 
 	<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
 	<script src="{% static 'material/js/material-kit.min.js' %}" type="text/javascript"></script>
+
+	<script>
+		$.ajax({
+			url : "/api/regular_user/",
+			type : 'get',
+			beforeSend : function(request){
+				request.setRequestHeader("Authorization",
+					"Token " + token);
+			},
+			
+			dataType : 'json',
+			success: function(data){
+				var name = data['name'];
+				$('#name').val(name);
+				var college = data['college'];
+				$("#college").val(college);
+				var phone = data['phone'];
+				$('#phone').val(phone);
+				var gender = data['gender'];
+				$('#gender').val(gender).change();
+				var birthday = data['birthday'];
+				$('#birthday').val(birthday); 
+			},
+			error: function(MLHttpRequest, textStatus, errorThrown){
+				alert("Please log in again!");
+				window.location.href = "/user_login/";
+			},
+		});
+	</script>
 </html>
 
 

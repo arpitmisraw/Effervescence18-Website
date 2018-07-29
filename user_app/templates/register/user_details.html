@@ -18,7 +18,7 @@
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
 	{% load static %}
 
     <link href="{% static 'material/css/bootstrap.min.css' %}" rel="stylesheet" />
@@ -42,8 +42,8 @@
 					<div class="collpase navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="{% url 'new_user' %}">
-									<i class="material-icons">apps</i> Register
+								<a href="{% url 'user_login' %}">
+									<i class="material-icons">apps</i>Login
 								</a>
 							</li>
 		
@@ -59,20 +59,7 @@
 					<div class="card card-signup">
 						<h2 style="text-align:center; color:rgba(100, 100, 100, 0.8)">User Details</h2>
 						<form class="form" method="" action="login-page.html">
-							<!-- <div class="header header-primary text-center">
-								<h4 class="card-title">Log in</h4>
-								<div class="social-line">
-									<a href="login-page.html#pablo" class="btn btn-just-icon btn-simple">
-										<i class="fa fa-facebook-square"></i>
-									</a>
-									<a href="login-page.html#pablo" class="btn btn-just-icon btn-simple">
-										<i class="fa fa-twitter"></i>
-									</a>
-									<a href="login-page.html#pablo" class="btn btn-just-icon btn-simple">
-										<i class="fa fa-google-plus"></i>
-									</a>
-								</div>
-							</div> -->
+
 							<div class="card-content">
 
 								<div class="input-group">
@@ -84,7 +71,7 @@
 
 								<div class="input-group">
 									<span class="input-group-addon">
-										<i class="material-icons">email</i>
+										<i class="material-icons">face</i>
 									</span>
 									<input type="text" class="form-control" placeholder="Name..." id="name">
 								</div>
@@ -109,15 +96,29 @@
 									<span class="input-group-addon">
 										<i class="material-icons">person</i>
 									</span>
-									<input type="text" placeholder="Gender..." class="form-control" id="gender"/>
+									<div class="col-xs-12">
+									<select class="selectpicker" data-style="form-control" data-size="7" id="gender">
+										<option id= "M" value="M">Male </option>
+										<option id = 'F' value="F">Female</option>
+										<option id = 'O' value="O">Other</option>
+									</select>
+									</div>
                 </div>
                 
                 <div class="input-group" data-provide = 'datepicker'>
-									<span class="input-group-addon">
-										<i class="material-icons">calendar_today</i>
-									</span>
-									<input type="text" placeholder="Birthday..." class="form-control" id="birthday"/>
-								</div>
+										<span class="input-group-addon">
+											<i class="material-icons">calendar_today</i>
+										</span>
+										<input type="text" placeholder="Birthday..." class="form-control" id="birthday"/>
+									</div>
+
+									<div class="input-group">
+											<span class="input-group-addon">
+												<i class="material-icons">perm_identity</i>
+											</span>
+											<input type="text" placeholder="Facebook id link..." class="form-control" id="fb-id"/>
+										</div>
+									</div>
 
 							</div>
 							<div class="footer text-center">
@@ -139,7 +140,18 @@
 
 	</div>
 
+
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$( function() {
+			$( "#birthday" ).datepicker({
+				defaultDate: -7514,
+				changeYear: true,
+				changeMonth: true
+			});
+		} );
+		</script>
 	
   <script>
 
@@ -172,7 +184,7 @@
       var college = $("#college").val();
       var phone = $('#phone').val();
       var gender = $('#gender').val();
-      var birthday = $('#birthday').val();
+      var birthday = $("#birthday").datepicker("option", "dateFormat", "yy-mm-dd" ).val();
   
       $.ajax({
         url : "/api/regular_user/",
