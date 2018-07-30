@@ -246,6 +246,7 @@
 	</div>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.9/dist/sweetalert2.all.min.js"></script>
 	
   <script>
     $(".login_form").on("click", function(e) {
@@ -272,9 +273,8 @@
         },
         error: function(MLHttpRequest, textStatus, errorThrown){
         for(key in MLHttpRequest.responseJSON){
-            alert(MLHttpRequest.responseJSON[key]);
+            swal(String(MLHttpRequest.responseJSON[key]));
           }
-        window.location.href = "/set_new_user/";
       },
       });
     });

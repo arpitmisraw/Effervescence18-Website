@@ -117,7 +117,7 @@
 	        <div class="container">
 
 	            <div class="copyright col-md-12" style="text-align:center">
-	                &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="#" target="_blank">Effervescence</a>
+	                &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="https://effe.org.in" target="_blank">Effervescence</a>
 	            </div>
 	        </div>
 	    </footer>
@@ -125,7 +125,7 @@
 	</div>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.9/dist/sweetalert2.all.min.js"></script>
 	<script>
 			$(".login_form").on("click", function(e) {
 			  var username = $("#username").val();
@@ -146,9 +146,8 @@
 				},
 				error: function(MLHttpRequest, textStatus, errorThrown){
 				  for(key in MLHttpRequest.responseJSON){
-					alert(MLHttpRequest.responseJSON[key]);
+					swal(String(MLHttpRequest.responseJSON[key]));
 				  }
-				  window.location.href = "/user_login/";
 				}
 			  });
 			}); 
@@ -178,7 +177,7 @@
 
 	<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
 	<script src="{% static 'material/js/jasny-bootstrap.min.js' %}"></script>
-
+	
 	<!--    Plugin For Google Maps   -->
 	<script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFPQibxeDaLIUHsC6_KqDdFaUdhrbhZ3M"></script>
 
