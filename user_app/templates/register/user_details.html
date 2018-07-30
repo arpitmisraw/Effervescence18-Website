@@ -185,6 +185,7 @@
       var phone = $('#phone').val();
       var gender = $('#gender').val();
       var birthday = $("#birthday").datepicker("option", "dateFormat", "yy-mm-dd" ).val();
+			var fb_id = $("#fb-id").val();
   
       $.ajax({
         url : "/api/regular_user/",
@@ -198,11 +199,12 @@
           "college": college, 
           "phone" : phone,
           "gender" : gender,
-          "birthday" : birthday
+          "birthday" : birthday,
+					"fb_id":fb_id
         },
         dataType : 'json',
         success: function(data){
-          window.location.href = "/";
+          window.location.href = "/account/";
         },
         error: function(MLHttpRequest, textStatus, errorThrown){
           for(key in MLHttpRequest.responseJSON){

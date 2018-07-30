@@ -44,7 +44,7 @@
 					<div class="collpase navbar-collapse">
 							<ul class="nav navbar-nav navbar-right">
 								<li>
-									<a href="{% url 'homepage' %}">
+									<a href="{% url 'account' %}">
 										<i class="material-icons">apps</i> Homepage
 									</a>
 								</li>
@@ -208,7 +208,6 @@
 					$('#gender').val(gender);
 					var birthday = data['birthday'];
 					$("#birthday").datepicker("option", "dateFormat", "yy-mm-dd" ).val(birthday);
-
 					var fb_id = data['fb_id'];
 					$('#fb-id').val(fb_id);
         },

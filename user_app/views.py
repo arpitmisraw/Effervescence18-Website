@@ -72,6 +72,7 @@ class RegularUserAPI(APIView):
         if serializer.is_valid():
             regular_user = serializer.save()
             regular_user.user = request.user
+            regular_user.fb_id=request.data.get('fb_id')
             try:
             	token = Token.objects.get(user = request.user)
             except:
