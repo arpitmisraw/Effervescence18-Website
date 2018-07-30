@@ -40,7 +40,17 @@ p {
   .parallax-container .section {
     width: 100%;
   }
+@media only screen and (max-width : 690px){
+	.navbar-brand{
+		display:none;
+	}
+}
 
+@media only screen and (max-width : 342px){
+	.intro{
+		font-size:24px;
+	}
+}
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;
