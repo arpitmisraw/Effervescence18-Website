@@ -35,6 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegularUserSerializer(serializers.ModelSerializer): 
+    phone = serializers.RegexField(regex = r'^[0-9]{10}$')
+
     class Meta:
         model = RegularUser
         exclude = ['user', 'referral']

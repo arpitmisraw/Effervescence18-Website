@@ -208,9 +208,15 @@
           window.location.href = "/account/";
         },
         error: function(MLHttpRequest, textStatus, errorThrown){
-          for(key in MLHttpRequest.responseJSON){
-            swal(String(MLHttpRequest.responseJSON[key]));
-          }
+          if(phone.length != 10){
+						alert("Enter valid phone number");
+					}
+					else{
+						for(key in MLHttpRequest.responseJSON){
+							alert(MLHttpRequest.responseJSON[key]);
+						}
+					}
+					window.location.href = "/user_details/";
         }
       });
     });

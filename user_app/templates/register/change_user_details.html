@@ -248,9 +248,14 @@
             window.location.href = "/account/";
           },
           error: function(MLHttpRequest, textStatus, errorThrown){
-            for(key in MLHttpRequest.responseJSON){
-              alert(MLHttpRequest.responseJSON[key]);
-            }
+						if(phone.length != 10){
+							alert("Enter valid phone number");
+						}
+						else{
+							for(key in MLHttpRequest.responseJSON){
+								alert(MLHttpRequest.responseJSON[key]);
+							}
+						}
             window.location.href = "/change_user_details/";
           }
         });
