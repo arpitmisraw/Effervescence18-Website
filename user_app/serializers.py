@@ -96,6 +96,16 @@ class FileSerializer(serializers.ModelSerializer):
         model = File
         fields = ['file']
 
+    
+
+class FileUploadSerializer(serializers.ModelSerializer):
+    event_name = serializers.CharField(max_length = 100)
+    class Meta:
+        model = File
+        fields = ['file', 'event_name']
+
+
+
 class UserVerificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerifiedUser

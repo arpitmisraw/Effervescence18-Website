@@ -20,6 +20,7 @@ from .serializers import (  UserSerializer,
                             RegularUserEventSerializer,
                             FileSerializer,
                             UserVerificationSerializer,
+                            FileUploadSerializer,
                         )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -193,11 +194,15 @@ class RegularUserEventView(APIView):
 
 class FileView(APIView):
     parser_classes = (MultiPartParser, FormParser,)
+    serializer_class = FileUploadSerializer
 
     def post(self, request, *args, **kwargs):
-        file_serializer = FileSerializer(data = request.data)
+        file_serializer = FileUploadSerializer(data = request.data)
         if file_serializer.is_valid():
-            file = file_serializer.save(user = request.user)
+            event = Event.objects.get(event_name = file_serializer.validated_data['event_name'])
+            print(event)
+            file = File.objects.create(user = request.user, event = event, file = file_serializer.validated_data['file'])
+            # file = file_serializer.save(user = request.user, event = event)
             file.save()
             return Response(file_serializer.data, status = status.HTTP_201_CREATED)
         else:
@@ -208,7 +213,7 @@ class FileGenericView(generics.ListAPIView):
     parser_classes = (MultiPartParser, FormParser, JSONParser,)
     # queryset = File.objects.all()
     def get_queryset(self):
-        return RegularUser.objects.filter(user = self.request.user)
+        return File.objects.filter(user = self.request.user)
 
 class LeaderBoardView(APIView):
 
