@@ -48,6 +48,7 @@ class RegularUserSerializer(serializers.ModelSerializer):
             birthday = validated_data["birthday"],
             gender = validated_data["gender"],
             phone = validated_data["phone"],
+            suggested_referral = validated_data["suggested_referral"],
         )
         regular_user.save()
         return regular_user

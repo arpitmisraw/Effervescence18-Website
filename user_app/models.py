@@ -31,6 +31,7 @@ class RegularUser(models.Model):
 	phone = models.CharField(max_length = 10, null = True)
 	fb_id = models.CharField(max_length = 100, blank = True, null = True)
 	referral = models.CharField(max_length = 10, null = True)
+	suggested_referral = models.CharField(max_length = 10, blank=True, null=True)
 	subscription_amount = models.IntegerField(default = 0)
 	payment_status = models.BooleanField(default = False)
 	payment_id = models.CharField(max_length = 50, null = True, blank=True)

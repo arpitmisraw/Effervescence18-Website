@@ -78,7 +78,12 @@ class RegularUserAPI(APIView):
             	token = Token.objects.get(user = request.user)
             except:
             	token = request.META.get('HTTP_AUTHORIZATION')[7:]
-            # print(request.META)	
+            suggested_regular_user = RegularUser.objects.get(referral = serializer.validated_data['suggested_referral'])
+            print(suggested_regular_user)
+            if suggested_regular_user:
+                suggested_regular_user.total_points += 10
+                suggested_regular_user.save()
+
             regular_user.referral = 'FE' + str(token)[:8]
             regular_user.save()
             if regular_user:
