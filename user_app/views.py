@@ -207,7 +207,7 @@ class FileView(APIView):
     def post(self, request, *args, **kwargs):
         file_serializer = FileUploadSerializer(data = request.data)
         if file_serializer.is_valid():
-            event = Event.objects.get(event_name = file_serializer.validated_data['event_name'])
+            event = Event.objects.get(id = file_serializer.validated_data['id'])
             print(event)
             file = File.objects.create(user = request.user, event = event, file = file_serializer.validated_data['file'])
             # file = file_serializer.save(user = request.user, event = event)
@@ -215,6 +215,17 @@ class FileView(APIView):
             return Response(file_serializer.data, status = status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request, *args, **kwargs):
+        event = Event.objects.get(id = request.data['id']) 
+        file = File.objects.get(user = request.user, event = event)
+        print(file)
+        file_serializer = FileUploadSerializer(file, data = request.data, partial = True)
+        file.delete()
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status = status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class FileGenericView(generics.ListAPIView):
     serializer_class = FileSerializer

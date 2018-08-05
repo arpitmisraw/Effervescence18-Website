@@ -55,5 +55,9 @@ class File(models.Model):
 	file = models.FileField(blank = True, null = True)
 	# details = models.CharField(max_length = 200, blank = True, null = True)
 
+	def delete(self, *args, **kwargs):
+		self.file.delete()
+		super(File, self).delete(*args, **kwargs)
+
 	def __str__(self):
 		return self.user.username

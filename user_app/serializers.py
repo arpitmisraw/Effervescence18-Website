@@ -99,10 +99,10 @@ class FileSerializer(serializers.ModelSerializer):
     
 
 class FileUploadSerializer(serializers.ModelSerializer):
-    event_name = serializers.CharField(max_length = 100)
+    id = serializers.CharField(max_length = 100)
     class Meta:
         model = File
-        fields = ['file', 'event_name']
+        fields = ['file', 'id']
 
 
 

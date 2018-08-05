@@ -53,9 +53,9 @@ INSTALLED_APPS = [
     'rest_framework_social_oauth2',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ACCOUNT_LOGOUT_ON_GET = True
 # ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
@@ -183,3 +183,13 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'noreply.effervescence18@gmail.com'
+EMAIL_HOST_PASSWORD = 'effervescence18'
+
+
+ACCOUNT_ADAPTER = 'effe_portal.adapter.DefaultAccountAdapterCustom'
+URL_FRONT = 'http://ca.effe.org.in/accounts/'
