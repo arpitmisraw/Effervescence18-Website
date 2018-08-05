@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 2
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_LOGOUT_ON_GET = True
 # ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
