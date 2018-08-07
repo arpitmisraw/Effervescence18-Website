@@ -22,10 +22,12 @@ from rest_auth.views import (
     PasswordResetView, PasswordResetConfirmView
 )
 from allauth.account.views import ConfirmEmailView
+from django.views.generic import TemplateView
 
 urlpatterns = [
     re_path(r'^', include('django.contrib.auth.urls')),
     path('', include('user_app.urls'), name = 'home'),
+    path('frontend/', TemplateView.as_view(template_name = 'index.html')),
     path('api/', include('rest_auth.urls')),
     path('api/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
