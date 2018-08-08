@@ -283,7 +283,7 @@
 				success: function(data){
 				  var token = data["key"];
 				  localStorage.setItem("token", token);
-				  window.location.href = "/account/";
+				  window.location.href = "/frontend/";
 				},
 				error: function(MLHttpRequest, textStatus, errorThrown){
 				  for(key in MLHttpRequest.responseJSON){

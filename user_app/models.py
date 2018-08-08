@@ -13,6 +13,9 @@ class Event(models.Model):
 	points = models.IntegerField(null = True)
 	fee = models.IntegerField(null = True)
 	subscription = models.BooleanField(default = False)
+	facebook = models.CharField(default="",max_length=200)
+	twitter = models.CharField(default="",max_length=200)
+	instagram = models.CharField(default="",max_length=200)
 
 	def __str__(self):
 		return self.event_name
@@ -53,7 +56,13 @@ class File(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	event = models.ForeignKey(Event, on_delete = models.CASCADE, blank=True, null=True)
 	file = models.FileField(blank = True, null = True)
+	verified = models.BooleanField(default=False)
 	# details = models.CharField(max_length = 200, blank = True, null = True)
+
+	def save(self, *args,**kwargs):
+		if self.verified:
+			self.user.regularuser.total_points=self.user.regularuser.total_points+self.event.points
+			self.user.regularuser.save()
 
 	def delete(self, *args, **kwargs):
 		self.file.delete()
