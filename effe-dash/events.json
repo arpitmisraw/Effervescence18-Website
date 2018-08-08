@@ -1,0 +1,12 @@
+{
+	"events":[
+	{
+		"id":1,
+		"event_name":"Test Event",
+		"prize":22,
+		"description":"It will be a great event",
+		"points":22,
+		"fee":1111,
+		"subscription":false
+	}]
+}
