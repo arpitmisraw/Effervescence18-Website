@@ -36,6 +36,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegularUserSerializer(serializers.ModelSerializer): 
     phone = serializers.RegexField(regex = r'^[0-9]{10}$')
+    fb_id = serializers.RegexField(regex = r'^https://\w+.facebook.com/\w+$')
+    
 
     class Meta:
         model = RegularUser
@@ -48,6 +50,7 @@ class RegularUserSerializer(serializers.ModelSerializer):
             birthday = validated_data["birthday"],
             gender = validated_data["gender"],
             phone = validated_data["phone"],
+            fb_id = validated_data["fb_id"],
         )
         regular_user.save()
         return regular_user
@@ -110,6 +113,8 @@ class UserVerificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = VerifiedUser
         fields = ['user']
+
+
     
 
 
