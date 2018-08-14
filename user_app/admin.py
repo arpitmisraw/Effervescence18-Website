@@ -59,6 +59,9 @@ export_csv.short_description = u"Export CSV"
 class UserAdmin(admin.ModelAdmin):
     actions = [export_csv_user]
 
+class MyModelAdmin(admin.ModelAdmin):
+    actions = [export_csv]
+
 admin.site.register(RegularUser,MyModelAdmin)
 admin.site.register(User,UserAdmin)
 admin.site.register(Event)
