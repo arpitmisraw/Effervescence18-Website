@@ -62,6 +62,7 @@ class UserAdmin(admin.ModelAdmin):
 class MyModelAdmin(admin.ModelAdmin):
     actions = [export_csv]
 
+admin.site.unregister(User)
 admin.site.register(RegularUser,MyModelAdmin)
 admin.site.register(User,UserAdmin)
 admin.site.register(Event)
