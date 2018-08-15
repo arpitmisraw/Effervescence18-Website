@@ -36,7 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegularUserSerializer(serializers.ModelSerializer): 
     phone = serializers.RegexField(regex = r'^[0-9]{10}$')
-    fb_id = serializers.RegexField(regex = r'^https://\w+.facebook.com/\w+$')
+    fb_id = serializers.RegexField(regex = r'^(https://){0,1}\w+.facebook.com/\w+$')
     
 
     class Meta:
