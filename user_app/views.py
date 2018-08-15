@@ -116,7 +116,7 @@ class RegularUserAPI(APIView):
 class EventsApiView(APIView):
     def get(self, request, format = 'json'):
         event = Event.objects.all()
-        serializer = EventSerializer(event)
+        serializer = EventSerializer(event,many=True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 	
 class UserVerificationView(APIView):
