@@ -4,3 +4,4 @@ user_app/__pycache__/
 db.sqlite3
 venv/
 media/
+.vscode/

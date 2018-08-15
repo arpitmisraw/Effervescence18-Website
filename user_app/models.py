@@ -63,6 +63,7 @@ class File(models.Model):
 		if self.verified:
 			self.user.regularuser.total_points=self.user.regularuser.total_points+self.event.points
 			self.user.regularuser.save()
+		super().save(*args, **kwargs)
 
 	def delete(self, *args, **kwargs):
 		self.file.delete()
