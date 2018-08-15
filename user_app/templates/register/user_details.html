@@ -116,7 +116,7 @@
 											<span class="input-group-addon">
 												<i class="material-icons">perm_identity</i>
 											</span>
-											<input type="text" placeholder="Facebook id link..." class="form-control" id="fb-id"/>
+											<input type="text" placeholder="Facebook ID - www.facebook.com/..." class="form-control" id="fb-id"/>
 										</div>
 									</div>
 
@@ -213,7 +213,12 @@
 					}
 					else{
 						for(key in MLHttpRequest.responseJSON){
-							alert(MLHttpRequest.responseJSON[key]);
+							if(String(MLHttpRequest.responseJSON[key]) == "This value does not match the required pattern."){
+								swal("Please enter correct FB link");
+							}
+							else{
+								swal(String(MLHttpRequest.responseJSON[key]));
+							}
 						}
 					}
 					window.location.href = "/set_user_details/";
