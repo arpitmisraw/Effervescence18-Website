@@ -113,6 +113,12 @@ class RegularUserAPI(APIView):
     		return Response(serializer.data, status = status.HTTP_200_OK)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class EventsApiView(APIView):
+    def get(self, request, format = 'json'):
+        event = Event.objects.all()
+        serializer = EventSerializer(event)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+	
 class UserVerificationView(APIView):
     serializer_class = UserVerificationSerializer
 
