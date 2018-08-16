@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .serializers import (  UserSerializer, 
                             RegularUserSerializer, 
+                            RegularUserGetSerializer,
                             UserDetailSerializer, 
                             RegularUserDetailSerializer, 
                             RegularUserUpdateSerializer, 
@@ -99,7 +100,7 @@ class RegularUserAPI(APIView):
 
     def get(self, request, format = 'json'):
         regular_user = RegularUser.objects.get(user = request.user)
-        serializer = RegularUserSerializer(regular_user)
+        serializer = RegularUserGetSerializer(regular_user)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
     	
