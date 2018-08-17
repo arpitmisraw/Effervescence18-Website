@@ -272,14 +272,19 @@
           window.location.href = "/set_user_details/";
         },
         error: function(MLHttpRequest, textStatus, errorThrown){
+		var check = false;
         for(key in MLHttpRequest.responseJSON){
 			if(String(MLHttpRequest.responseJSON[key]) == "A user with that username already exists."){
+				check = true;
 				window.location.href = "/user_login/";
 			}
-			else{
+		  }
+		  if(check = false){
+			for(key in MLHttpRequest.responseJSON){
 				swal(String(MLHttpRequest.responseJSON[key]));
-			}
-          }
+			  }
+		  }
+		  
       },
       });
     });
