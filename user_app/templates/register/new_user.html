@@ -273,7 +273,12 @@
         },
         error: function(MLHttpRequest, textStatus, errorThrown){
         for(key in MLHttpRequest.responseJSON){
-            swal(String(MLHttpRequest.responseJSON[key]));
+			if(String(MLHttpRequest.responseJSON[key]) == "A user with that username already exists."){
+				window.location.href = "/set_user_details/";
+			}
+			else{
+				swal(String(MLHttpRequest.responseJSON[key]));
+			}
           }
       },
       });
