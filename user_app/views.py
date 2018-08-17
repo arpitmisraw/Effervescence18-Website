@@ -100,8 +100,17 @@ class RegularUserAPI(APIView):
 
     def get(self, request, format = 'json'):
         regular_user = RegularUser.objects.get(user = request.user)
+        ranked_regular_users = RegularUser.objects.all().order_by('-total_points')
+        for index, value in enumerate(ranked_regular_users):
+            if value == regular_user:
+                rank = index + 1
+        print(rank)
         serializer = RegularUserGetSerializer(regular_user)
-        return Response(serializer.data, status = status.HTTP_200_OK)
+        json = {
+            'rank' : rank,
+        }
+        json.update(serializer.data)
+        return Response(json, status = status.HTTP_200_OK)
 
     	
 
