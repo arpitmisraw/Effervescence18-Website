@@ -248,13 +248,26 @@ class LeaderBoardView(APIView):
         regular_user = RegularUser.objects.all().order_by('-total_points')
         json = []
         for i in regular_user:
-            json += [
-                {
-                    'id' : i.pk,
-                    'name' : i.name,
-                    'points' : i.total_points
-                }
-            ]
+            if(i.user == request.user):
+                json += [
+                    {
+                        'id' : i.pk,
+                        'name' : i.name,
+                        'points' : i.total_points,
+                        'college' : i.college,
+                        'current_user' : True,
+                    }
+                ]
+            else:
+                json += [
+                    {
+                        'id' : i.pk,
+                        'name' : i.name,
+                        'points' : i.total_points,
+                        'college' : i.college,
+                        'current_user' : False,
+                    }
+                ]
 
         return Response(json, status = status.HTTP_200_OK)
 
