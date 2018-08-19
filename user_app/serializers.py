@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from .models import RegularUser, Event, File, VerifiedUser
 from django.contrib.auth import authenticate, login, logout
-
+from drf_extra_fields.fields import Base64ImageField
 
 
 
@@ -107,6 +107,13 @@ class FileSerializer(serializers.ModelSerializer):
         fields = ['file']
 
     
+
+class AndroidFileUploadSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(max_length = 100)
+    file = Base64ImageField()
+    class Meta:
+        model = File
+        fields = ['file', 'id']
 
 class FileUploadSerializer(serializers.ModelSerializer):
     id = serializers.CharField(max_length = 100)

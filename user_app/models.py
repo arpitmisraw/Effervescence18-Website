@@ -55,7 +55,7 @@ class VerifiedUser(models.Model):
 class File(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	event = models.ForeignKey(Event, on_delete = models.CASCADE, blank=True, null=True)
-	file = models.FileField(blank = True, null = True)
+	file = models.ImageField(blank = True, null = True)
 	verified = models.BooleanField(default=False)
 	# details = models.CharField(max_length = 200, blank = True, null = True)
 

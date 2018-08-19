@@ -14,3 +14,4 @@ requests==2.18.4
 requests-oauthlib==1.0.0
 six==1.11.0
 urllib3==1.22
+django-extra-fields==1.0.0

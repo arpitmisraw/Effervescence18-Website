@@ -27,6 +27,7 @@ urlpatterns = [
 	path('api/regular_user_payment_id/', views.RegularUserPaymentIdView.as_view(), name = 'regular_user_payment_id'),
 	path('api/regular_user_event/', views.RegularUserEventView.as_view(), name = 'regular_user_event'),
 	path('api/file_upload/', views.FileView.as_view(), name = 'file_upload'),
+	path('api/file_upload_mobile/', views.AndroidFileView.as_view(), name = 'file_upload_mobile'),
 	path('api/file_view/', views.FileGenericView.as_view(), name = 'file_view'),
 	path('api/leaderboard/', views.LeaderBoardView.as_view(), name = 'leaderboard'),
 
