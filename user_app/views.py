@@ -126,9 +126,10 @@ class RegularUserAPI(APIView):
 
 class EventsApiView(APIView):
     def get(self, request, format = 'json'):
-        event = Event.objects.all()
-        serializer = EventSerializer(event,many=True)
+        event = Event.objects.all().order_by("-id")
+        serializer = EventSerializer(event, many=True)
         return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 	
 class UserVerificationView(APIView):
     serializer_class = UserVerificationSerializer
@@ -250,7 +251,7 @@ class AndroidFileView(APIView):
     serializer_class = AndroidFileUploadSerializer
 
     def post(self, request, *args, **kwargs):
-        file_serializer = FileUploadSerializer(data = request.data)
+        file_serializer = AndroidFileUploadSerializer(data = request.data)
         if file_serializer.is_valid():
             event = Event.objects.get(id = file_serializer.validated_data['id'])
             print(event)
